@@ -71,7 +71,16 @@ public class Board implements Displayable {
          * └────────┘ │
          *  ╲________╲│
          */
-        int nbCards = 0; //- AREMPLEACER par le nombre de cartes présentes
+        int nbCards = 0;
+        switch(tier){
+            case 1:
+                nbCards = tier1.size();
+            case 2:
+                nbCards = tier2.size();
+            case 3:
+                nbCards = tier3.size();
+        }
+        
         String[] deckStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  ",
                             "\u2502        \u2502\u2572 ",
                             "\u2502 reste: \u2502 \u2502",
