@@ -11,17 +11,17 @@ import java.util.Collections;
 public class Board implements Displayable {
     private String filename;
     private Scanner scanner;
-    private ArrayList<Stack> tiers;
+    private ArrayList<Stack<DevCard>> tiers;
     private ArrayList<ArrayList<DevCard>> visibleCards;
     private Resources resources;
     
     public Board(){
         this.filename = "stats.csv";
-        tiers = new ArrayList<Stack>();
-        tiers.add(new Stack()); // noble
-        tiers.add(new Stack()); // t1
-        tiers.add(new Stack()); 
-        tiers.add(new Stack());
+        tiers = new ArrayList<Stack<DevCard>>();
+        tiers.add(new Stack<DevCard>()); // noble
+        tiers.add(new Stack<DevCard>()); // t1
+        tiers.add(new Stack<DevCard>()); 
+        tiers.add(new Stack<DevCard>());
         visibleCards = new ArrayList<ArrayList<DevCard>>();
         resources = new Resources(0,0,0,0,0);
         try {
@@ -145,5 +145,46 @@ public class Board implements Displayable {
     
     public DevCard getCard(int i, int j){
         return visibleCards.get(i).get(j);
+    }
+    
+    public void updateCard(DevCard old_card){
+        int cpt=0;
+        for (DevCard card : visibleCards.get(old_card.getTier())){
+            if (card.equals(old_card)){
+                if (visibleCards.get(old_card.getTier()).isEmpty()){
+                    visibleCards.get(old_card.getTier()).set(cpt, null);
+                } else {
+                    visibleCards.get(old_card.getTier()).set(cpt, drawCard(old_card.getTier()));
+                }
+            }
+            cpt++;
+        }
+        
+    }
+    
+    public void updateCard(int i, int j){
+        if (visibleCards.get(i).isEmpty()){
+            visibleCards.get(i).set(j, null);
+        } else {
+            visibleCards.get(i).set(j, drawCard(i));
+        }
+    }
+    
+    public DevCard drawCard(int tier){
+        return tiers.get(tier).pop();
+    }
+    
+    public boolean canGiveSameTokens(Resource res){
+        return getNbResource(res) >= 4;
+    }
+    
+    public boolean canGiveDiffTokens (ArrayList<Resource> res_wanted){
+        ArrayList<Resource> res_dispo = getAvailableResources();
+        for (Resource res :res_wanted){
+            if (!res_dispo.contains(res)){
+                return false;
+            }
+        }
+        return true;
     }
 }

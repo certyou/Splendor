@@ -16,4 +16,6 @@ comment4.text=\ retire\ {v}\ a\ la\ ressource\ {ressource}\n\ \n\ input\ \:\ \n\
 comment5.params=
 comment5.target=java.util.ArrayList\ getAvailableResources()
 comment5.text=\ renvoi\ la\ liste\ des\ ressources\ qui\ sont\ disponible\n\ \n\ input\ \:\ \n\ output\ \:\ liste\ des\ Ressources\ disponible\n\ precondition\ \:\n\ postcondition\ \:\n
-numComments=6
+comment6.params=res
+comment6.target=boolean\ equals(Resources)
+numComments=7

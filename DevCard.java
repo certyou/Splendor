@@ -4,14 +4,14 @@ import java.util.Stack;
 
 public class DevCard implements Displayable {
     private int tier;
-    private Resource cost;
+    private Resources cost;
     private int points;
     private Resource resourceType;
 
     public DevCard(int tier, int coutDIAMMOND, int coutSAPPHIRE, int coutEMERALD, int coutRUBY, int coutONYX, int points, String type)
     {
         this.tier = tier;
-        //this.cost = new Resources(coutDIAMMOND, coutSAPPHIRE, coutEMERALD, coutRUBY, coutONYX);
+        this.cost = new Resources(coutDIAMMOND, coutSAPPHIRE, coutEMERALD, coutRUBY, coutONYX);
         this.points = points;
         switch(type) {
           case "DIAMOND":
@@ -40,7 +40,7 @@ public class DevCard implements Displayable {
         return points;
     }
     
-    public Resource getCost(){
+    public Resources getCost(){
         return cost;
     }
     
@@ -118,5 +118,12 @@ public class DevCard implements Displayable {
         }
         */
         return cardStr;
+    }
+    
+    public boolean equals(DevCard card){
+        return tier == card.tier
+        && points == card.points
+        && resourceType == card.resourceType
+        && cost.equals(card.cost);
     }
 }

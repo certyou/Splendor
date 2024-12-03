@@ -144,4 +144,13 @@ public class Resources extends HashMap<Resource, Integer> {
         }
         return result;
     }
+    
+    public boolean equals(Resources res){
+        for (Resource r : Resource.values()){
+            if (super.get(r) != super.get(res)){
+                return false;
+            }
+        }
+        return true;
+    }
 }
