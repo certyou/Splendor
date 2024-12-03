@@ -7,6 +7,7 @@
  */
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class HumanPlayer extends Player
 {
@@ -16,19 +17,26 @@ public class HumanPlayer extends Player
         super(id, name);
     }
     
-    public Action chooseAction(Board board){
+    public Action chooseAction(Board board) throws IllegalArgumentException{
         int choice;
         System.out.println("Choisissez votre acction:\n -1 : Acheter une carte sur le plateau \n -2 : Prendre 2 jetons ressources de même type\n -3 : Prendre 3 jetons ressources de type différents\n -4 : Passer son tour");
         while(true){
             choice = keyBord.nextInt();
-            
-            if(choice >= 1 && choice <= 4){
-                if(
+            try{
+                if(choice >= 1 && choice <= 4){
+                    throw IllegalArgumentException("Choix invalide");
+                }
+                if(choice == 1){
+                    System.out.println("Entrez le numero de la ligne de la carte que vous souhaitez selectioner:");
+                }
+            }
+            catch(InputMismatchException e1){
+                System.out.println(e1.getMessage());
+            }
+            catch(IllegalArgumentException e2){
+                System.out.println(e2.getMessage());
             }
         }
-        
-        
-        
     
     }
     
