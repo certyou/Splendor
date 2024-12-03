@@ -1,6 +1,4 @@
-import java.io.File;
-import java.util.Scanner;
-import java.util.Stack;
+ 
 
 public class DevCard implements Displayable {
     private int tier;

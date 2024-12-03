@@ -7,14 +7,14 @@
  */
 public class BuyCardAction implements Action
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    private DevCard card;
 
     /**
      * Constructeur d'objets de classe BuyCardAction
      */
-    public BuyCardAction()
+    public BuyCardAction(DevCard card)
     {
-
+        this.card = card;
     }
 
     /**
@@ -23,10 +23,10 @@ public class BuyCardAction implements Action
      * @param  y   le paramètre de la méthode
      * @return     la somme de x et de y
      */
-    public void process(Player player, Ressource choix, Board board)
+    public void process(Player player, Board board)
     {
-        if (board.getNbResource(Resource.choix)>3) {
-            player.updateNbResource(Resource.choix,2);
-        }
+        board.updateCard(card);
+        player.addPurchasedCard(card);
+        player.updatePoints(card.getPoints());
     }
 }

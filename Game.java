@@ -68,24 +68,26 @@ public class Game extends Exception {
         display.outBoard.println(String.join("\n", mainDisplay));
     }
 
-    public void plapublic void process(Player player, Ressource choix, Board board)
+    public void process(Player player, Ressource choix, Board board)
     {
         if (board.getNbResource(Resource.choix)>3) {
             player.updateNbResource(Resource.choix,2);
         }
-    }y(Player player){
+    }
+    
+    public void play(Player player){
         move(player);
         discardToken(player);
     }
 
     private void move(Player player){
-        Action choix = player.chooseAction();
-        choix.process(player);
+        Action choix = player.chooseAction(board);
+        choix.process(player, board);
     }
 
     private void discardToken(Player player){
         if (player.getNbTokens() > 10 ) {
-            Action choix = new 
+            DiscardTokensAction choix = new DiscardTokensAction();
         }
     }
 

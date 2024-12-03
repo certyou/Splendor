@@ -9,14 +9,13 @@
  */
 public class PickSameTokensAction implements Action
 {
-
+    private Resource res;
     /**
      * Constructeur d'objets de classe PickSameTokensAction
      */
-    public PickSameTokensAction()
+    public PickSameTokensAction(Resource r)
     {
-        // initialisation des variables d'instance
-        
+        res = r;
     }
 
     /**
@@ -25,10 +24,11 @@ public class PickSameTokensAction implements Action
      * @param  y   le paramètre de la méthode
      * @return     la somme de x et de y
      */
-    public void process(Player player, Ressource choix, Board board)
+    public void process(Player player, Board board)
     {
-        if (board.getNbResource(Resource.choix)>3) {
-            player.updateNbResource(Resource.choix,2);
+        if (board.getNbResource(res)>3) {
+            player.updateNbResource(res,2);
+            board.updateNbResource (res,-2);
         }
     }
 }

@@ -7,14 +7,18 @@
  */
 public class PickDiffTokensAction implements Action
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    private Resource res1;
+    private Resource res2;
+    private Resource res3;
 
     /**
      * Constructeur d'objets de classe PickDiffTokensAction
      */
-    public PickDiffTokensAction()
+    public PickDiffTokensAction(Resource res1,Resource res2, Resource res3 )
     {
-    
+        this.res1 = res1;
+        this.res2 = res2;
+        this.res3 = res3;
     }
 
     /**
@@ -23,10 +27,13 @@ public class PickDiffTokensAction implements Action
      * @param  y   le paramètre de la méthode
      * @return     la somme de x et de y
      */
-    public void process(Player player, Ressource choix, Board board)
+    public void process(Player player, Board board)
     {
-        if (board.getNbResource(Resource.choix)>3) {
-            player.updateNbResource(Resource.choix,2);
-        }
+        player.updateNbResource(res1,1);
+        player.updateNbResource(res2,1);
+        player.updateNbResource(res3,1);
+        board.updateNbResource(res1,-1);
+        board.updateNbResource(res2,-1);
+        board.updateNbResource(res3,-1);
     } 
 }
