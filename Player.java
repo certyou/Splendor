@@ -1,3 +1,5 @@
+package Splendor;
+
 
 public abstract class Player implements Displayable {
 
