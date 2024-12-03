@@ -7,14 +7,16 @@
  */
 public class PickDiffTokensAction implements Action
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    private Resources res1;
 
     /**
      * Constructeur d'objets de classe PickDiffTokensAction
      */
-    public PickDiffTokensAction()
+    public PickDiffTokensAction(Resources res1,Resources res2, Resources res3 )
     {
-    
+        this.res1 = res1
+        this.res2 = res2
+        this.res3 = res3
     }
 
     /**

@@ -1,4 +1,4 @@
-package Splendor;
+ 
 
 import java.awt.BorderLayout;
 import java.awt.Font;

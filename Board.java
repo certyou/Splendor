@@ -1,4 +1,4 @@
-package Splendor;
+ 
 
 import java.io.File;
 import java.io.FileNotFoundException;

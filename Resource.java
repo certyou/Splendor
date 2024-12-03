@@ -1,4 +1,4 @@
-package Splendor;
+ 
 
 public enum Resource {
     DIAMOND,
