@@ -74,13 +74,13 @@ public class Game extends Exception {
     }
 
     private void move(Player player){
-        choix = player.chooseAction();
-        
+        Action choix = player.chooseAction();
+        choix.process(player);
     }
 
     private void discardToken(Player player){
         if (player.getNbTokens() > 10 ) {
-            
+            Action choix = new 
         }
     }
 

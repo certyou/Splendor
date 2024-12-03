@@ -16,7 +16,7 @@ public class PickSameTokensAction implements Action
     public PickSameTokensAction()
     {
         // initialisation des variables d'instance
-        x = 0;
+        
     }
 
     /**
