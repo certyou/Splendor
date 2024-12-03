@@ -1,22 +1,20 @@
- 
-
 
 /**
- * Décrivez votre classe PickSameTokensAction ici.
+ * Décrivez votre classe PickDiffTokensAction ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class PickSameTokensAction implements Action
+public class PickDiffTokensAction implements Action
 {
+    // variables d'instance - remplacez l'exemple qui suit par le vôtre
 
     /**
-     * Constructeur d'objets de classe PickSameTokensAction
+     * Constructeur d'objets de classe PickDiffTokensAction
      */
-    public PickSameTokensAction()
+    public PickDiffTokensAction()
     {
-        // initialisation des variables d'instance
-        
+    
     }
 
     /**
@@ -30,5 +28,5 @@ public class PickSameTokensAction implements Action
         if (board.getNbResource(Resource.choix)>3) {
             player.updateNbResource(Resource.choix,2);
         }
-    }
+    } 
 }

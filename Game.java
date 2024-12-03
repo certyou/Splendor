@@ -1,4 +1,4 @@
-package Splendor;
+ 
 /*
  * @author    Corentin Dufourg
  * @version     1.1
@@ -68,7 +68,12 @@ public class Game extends Exception {
         display.outBoard.println(String.join("\n", mainDisplay));
     }
 
-    public void play(Player player){
+    public void plapublic void process(Player player, Ressource choix, Board board)
+    {
+        if (board.getNbResource(Resource.choix)>3) {
+            player.updateNbResource(Resource.choix,2);
+        }
+    }y(Player player){
         move(player);
         discardToken(player);
     }

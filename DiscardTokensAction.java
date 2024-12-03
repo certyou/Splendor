@@ -1,21 +1,19 @@
- 
-
 
 /**
- * Décrivez votre classe PickSameTokensAction ici.
+ * Décrivez votre classe DiscardTokensAction ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class PickSameTokensAction implements Action
+public class DiscardTokensAction implements Action
 {
+    // variables d'instance - remplacez l'exemple qui suit par le vôtre
 
     /**
-     * Constructeur d'objets de classe PickSameTokensAction
+     * Constructeur d'objets de classe DiscardTokensAction
      */
-    public PickSameTokensAction()
+    public DiscardTokensAction()
     {
-        // initialisation des variables d'instance
         
     }
 

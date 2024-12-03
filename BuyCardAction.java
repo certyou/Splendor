@@ -1,22 +1,20 @@
- 
-
 
 /**
- * Décrivez votre classe PickSameTokensAction ici.
+ * Décrivez votre classe BuyCardAction ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class PickSameTokensAction implements Action
+public class BuyCardAction implements Action
 {
+    // variables d'instance - remplacez l'exemple qui suit par le vôtre
 
     /**
-     * Constructeur d'objets de classe PickSameTokensAction
+     * Constructeur d'objets de classe BuyCardAction
      */
-    public PickSameTokensAction()
+    public BuyCardAction()
     {
-        // initialisation des variables d'instance
-        
+
     }
 
     /**
