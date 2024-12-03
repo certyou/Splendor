@@ -9,6 +9,11 @@ public abstract class Player implements Displayable {
     private ArrayList<DevCard> purchasedCards;
     private Resources resources;
     
+    public Player(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+    
     /* --- Accesseurs des atribus --- */
     public String getName(){return name;}
     public int getPoints(){return points;}
@@ -80,7 +85,7 @@ public abstract class Player implements Displayable {
         return true;
     }
     
-    abstract void chooseAction();
+    abstract Action chooseAction();
     abstract void chooseDiscardingTokens();
     
     

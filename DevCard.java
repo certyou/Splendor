@@ -1,4 +1,4 @@
-package Splendor;
+ 
 
 public class DevCard implements Displayable {
     
