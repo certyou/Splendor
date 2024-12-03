@@ -140,6 +140,10 @@ public class Board implements Displayable {
     public void setNbResource(Resource res, int new_value){
         resources.setNbResource(res, new_value);
     }
+
+    public void updateNbResource(Resource res, int v){
+        resources.updateNbResource(res, v);
+    }
     
     public ArrayList<Resource> getAvailableResources(){
         return resources.getAvailableResources();
