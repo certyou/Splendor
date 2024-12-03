@@ -6,14 +6,30 @@ public class DevCard implements Displayable {
     private int tier;
     private Resource cost;
     private int points;
-    private String resourceType;
+    private Resource resourceType;
 
     public DevCard(int tier, int coutDIAMMOND, int coutSAPPHIRE, int coutEMERALD, int coutRUBY, int coutONYX, int points, String type)
     {
         this.tier = tier;
         //this.cost = new Resources(coutDIAMMOND, coutSAPPHIRE, coutEMERALD, coutRUBY, coutONYX);
         this.points = points;
-        this.resourceType = type;
+        switch(type) {
+          case "DIAMOND":
+            this.resourceType = Resource.DIAMOND;
+            break;
+          case "SAPPHIRE":
+            this.resourceType = Resource.SAPPHIRE;
+            break;
+        case "EMERALD":
+            this.resourceType = Resource.EMERALD;
+            break;
+        case "RUBY":
+            this.resourceType = Resource.RUBY;
+            break;
+        case "ONYX":
+            this.resourceType = Resource.ONYX;
+            break;
+        }
     }
     
     public int getTier(){
@@ -28,7 +44,7 @@ public class DevCard implements Displayable {
         return cost;
     }
     
-    public String getResourceType(){
+    public Resource getResourceType(){
         return resourceType;
     }
     
