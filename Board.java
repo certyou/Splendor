@@ -11,19 +11,17 @@ import java.util.Collections;
 public class Board implements Displayable {
     private String filename;
     private Scanner scanner;
-    private Stack noble;
-    private Stack tier1;
-    private Stack tier2;
-    private Stack tier3;
+    private ArrayList<Stack> tiers;
     private ArrayList<ArrayList<DevCard>> visibleCards;
     private Resources resources;
     
     public Board(){
         this.filename = "stats.csv";
-        noble = new Stack();
-        tier1 = new Stack();
-        tier2 = new Stack();
-        tier3 = new Stack();
+        tiers = new ArrayList<Stack>();
+        tiers.add(new Stack()); // noble
+        tiers.add(new Stack()); // t1
+        tiers.add(new Stack()); 
+        tiers.add(new Stack());
         visibleCards = new ArrayList<ArrayList<DevCard>>();
         resources = new Resources(0,0,0,0,0);
         try {
@@ -40,31 +38,18 @@ public class Board implements Displayable {
                             Integer.parseInt(colonnes[5]), // onyx
                             Integer.parseInt(colonnes[6]), // points
                             colonnes[7] // type
-                            );
-                switch (colonnes[0]){
-                    case "0":
-                        noble.push(new_card);
-                        break;
-                    case "1":
-                        tier1.push(new_card);
-                        break;
-                    case "2":
-                        tier2.push(new_card);
-                        break;
-                    case "3":
-                        tier3.push(new_card);
-                        break;
-                }
+                );    
+                
+                tiers.get(Integer.parseInt(colonnes[0])).push(new_card);
             }
         } catch (Exception e){
             System.out.println("fichier introuvable");
         }
         
         // shuffle cards
-        Collections.shuffle(noble);
-        Collections.shuffle(tier1);
-        Collections.shuffle(tier2);
-        Collections.shuffle(tier3);
+        for (Stack lib : tiers){
+            Collections.shuffle(lib);
+        }
     }
 
     /* --- Stringers --- */
@@ -81,15 +66,7 @@ public class Board implements Displayable {
          * └────────┘ │
          *  ╲________╲│
          */
-        int nbCards = 0;
-        switch(tier){
-            case 1:
-                nbCards = tier1.size();
-            case 2:
-                nbCards = tier2.size();
-            case 3:
-                nbCards = tier3.size();
-        }
+        int nbCards = tiers.get(tier).size();
         
         String[] deckStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  ",
                             "\u2502        \u2502\u2572 ",
@@ -154,19 +131,19 @@ public class Board implements Displayable {
         return boardToStringArray();
     }
     
-    public Resource getNbResource(Resource res){
-        return res;
+    public int getNbResource(Resource res){
+        return resources.getNbResource(res);
     }
     
-    public void setNbResource(Resource res){
-        res = res;
+    public void setNbResource(Resource res, int new_value){
+        resources.setNbResource(res, new_value);
     }
     
-    public Resource getAvailableResources(){
-        return resources;
+    public ArrayList<Resource> getAvailableResources(){
+        return resources.getAvailableResources();
     }
     
-    public CardDev getCard(int tier){
-        return tier1.pop();
+    public DevCard getCard(int i, int j){
+        return visibleCards.get(i).get(j);
     }
 }

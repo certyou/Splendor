@@ -69,7 +69,7 @@ public class Resources extends HashMap<Resource, Integer> {
             System.out.println("ERROR : getNbResource");
         }
         // corps
-        return super.get(ressource);    
+        return super.get(ressource);  
     }
     
     /* Setter pour les ressources
