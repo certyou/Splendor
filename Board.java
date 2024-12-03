@@ -1,5 +1,3 @@
-package Splendor;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Stack;
@@ -11,6 +9,48 @@ import java.util.Set;
 import java.util.Collections;
 
 public class Board implements Displayable {
+    private String filename;
+    private Scanner scanner;
+    private ArrayList<Stack<DevCard>> tiers;
+    private ArrayList<ArrayList<DevCard>> visibleCards;
+    private Resources resources;
+    
+    public Board(){
+        this.filename = "stats.csv";
+        tiers = new ArrayList<Stack<DevCard>>();
+        tiers.add(new Stack<DevCard>()); // noble
+        tiers.add(new Stack<DevCard>()); // t1
+        tiers.add(new Stack<DevCard>()); 
+        tiers.add(new Stack<DevCard>());
+        visibleCards = new ArrayList<ArrayList<DevCard>>();
+        resources = new Resources(0,0,0,0,0);
+        try {
+            scanner = new Scanner(new File(filename));
+            while (scanner.hasNextLine()){
+                String new_raw = scanner.nextLine();
+                String[] colonnes = new_raw.split(",");
+                DevCard new_card = new DevCard(
+                            Integer.parseInt(colonnes[0]), // tier
+                            Integer.parseInt(colonnes[1]), // diammond
+                            Integer.parseInt(colonnes[2]), // sapphire
+                            Integer.parseInt(colonnes[3]), // emerald
+                            Integer.parseInt(colonnes[4]), // ruby
+                            Integer.parseInt(colonnes[5]), // onyx
+                            Integer.parseInt(colonnes[6]), // points
+                            colonnes[7] // type
+                );    
+                
+                tiers.get(Integer.parseInt(colonnes[0])).push(new_card);
+            }
+        } catch (Exception e){
+            System.out.println("fichier introuvable");
+        }
+        
+        // shuffle cards
+        for (Stack lib : tiers){
+            Collections.shuffle(lib);
+        }
+    }
 
     /* --- Stringers --- */
 
@@ -26,7 +66,8 @@ public class Board implements Displayable {
          * └────────┘ │
          *  ╲________╲│
          */
-        int nbCards = 0; //- AREMPLEACER par le nombre de cartes présentes
+        int nbCards = tiers.get(tier).size();
+        
         String[] deckStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  ",
                             "\u2502        \u2502\u2572 ",
                             "\u2502 reste: \u2502 \u2502",
@@ -88,5 +129,62 @@ public class Board implements Displayable {
     @Override
     public String[] toStringArray() {
         return boardToStringArray();
+    }
+    
+    public int getNbResource(Resource res){
+        return resources.getNbResource(res);
+    }
+    
+    public void setNbResource(Resource res, int new_value){
+        resources.setNbResource(res, new_value);
+    }
+    
+    public ArrayList<Resource> getAvailableResources(){
+        return resources.getAvailableResources();
+    }
+    
+    public DevCard getCard(int i, int j){
+        return visibleCards.get(i).get(j);
+    }
+    
+    public void updateCard(DevCard old_card){
+        int cpt=0;
+        for (DevCard card : visibleCards.get(old_card.getTier())){
+            if (card.equals(old_card)){
+                if (visibleCards.get(old_card.getTier()).isEmpty()){
+                    visibleCards.get(old_card.getTier()).set(cpt, null);
+                } else {
+                    visibleCards.get(old_card.getTier()).set(cpt, drawCard(old_card.getTier()));
+                }
+            }
+            cpt++;
+        }
+        
+    }
+    
+    public void updateCard(int i, int j){
+        if (visibleCards.get(i).isEmpty()){
+            visibleCards.get(i).set(j, null);
+        } else {
+            visibleCards.get(i).set(j, drawCard(i));
+        }
+    }
+    
+    public DevCard drawCard(int tier){
+        return tiers.get(tier).pop();
+    }
+    
+    public boolean canGiveSameTokens(Resource res){
+        return getNbResource(res) >= 4;
+    }
+    
+    public boolean canGiveDiffTokens (ArrayList<Resource> res_wanted){
+        ArrayList<Resource> res_dispo = getAvailableResources();
+        for (Resource res :res_wanted){
+            if (!res_dispo.contains(res)){
+                return false;
+            }
+        }
+        return true;
     }
 }
