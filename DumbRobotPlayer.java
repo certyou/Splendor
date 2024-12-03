@@ -7,8 +7,17 @@
  */
 public class DumbRobotPlayer extends Player
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
-
+    int id;
+    String name;
+    
+    public DumbRobotPlayer(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+    
+    public Action chooseAction(){
+        
+    }
+    
      
 }
