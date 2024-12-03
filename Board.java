@@ -15,6 +15,8 @@ public class Board implements Displayable {
     private Stack tier1;
     private Stack tier2;
     private Stack tier3;
+    private ArrayList<ArrayList<DevCard>> visibleCards;
+    private Resources resources;
     
     public Board(){
         this.filename = "stats.csv";
@@ -22,6 +24,8 @@ public class Board implements Displayable {
         tier1 = new Stack();
         tier2 = new Stack();
         tier3 = new Stack();
+        visibleCards = new ArrayList<ArrayList<DevCard>>();
+        resources = new Resources(0,0,0,0,0);
         try {
             scanner = new Scanner(new File(filename));
             while (scanner.hasNextLine()){
@@ -55,6 +59,12 @@ public class Board implements Displayable {
         } catch (Exception e){
             System.out.println("fichier introuvable");
         }
+        
+        // shuffle cards
+        Collections.shuffle(noble);
+        Collections.shuffle(tier1);
+        Collections.shuffle(tier2);
+        Collections.shuffle(tier3);
     }
 
     /* --- Stringers --- */
@@ -142,5 +152,21 @@ public class Board implements Displayable {
     @Override
     public String[] toStringArray() {
         return boardToStringArray();
+    }
+    
+    public Resource getNbResource(Resource res){
+        return res;
+    }
+    
+    public void setNbResource(Resource res){
+        res = res;
+    }
+    
+    public Resource getAvailableResources(){
+        return resources;
+    }
+    
+    public CardDev getCard(int tier){
+        return tier1.pop();
     }
 }
