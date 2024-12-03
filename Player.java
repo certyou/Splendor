@@ -85,8 +85,8 @@ public abstract class Player implements Displayable {
         return true;
     }
     
-    abstract Action chooseAction();
-    abstract void chooseDiscardingTokens();
+    abstract Action chooseAction(Board board);
+    abstract Resources chooseDiscardingTokens(int nbTokenToDiscard);
     
     
     

@@ -39,15 +39,21 @@ public class DumbRobotPlayer extends Player
         //Acheter des jetons ressources de type différents
         Resource res1;
         Resource res2;
+        Resource res3;
         for(Resource resource: board.getAvailableResources()){
            nbRes = getNbResource(resource);
-           if(nbRes >= 1 && res1 == null){
-               res1 = resource;
-           }
-           else{if(nbRes >= 1){
-                    res2 = resource;
-                    return new PickDiffTokensAction(res1,res2);
-                }
+           if(nbRes >= 1){
+               if(res1 == null){
+                   res1 = resource;
+               }
+               else{if(res2 == null){
+                        res2 = resource;
+                    }else{if(nbRes >= 1){
+                        res3 = resource;
+                        return new PickDiffTokensAction(res1,res2,res3);
+                        }    
+                    }
+               }
            }
         }
         
