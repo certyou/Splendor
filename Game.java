@@ -67,17 +67,18 @@ public class Game extends Exception {
         display.outBoard.clean();
         display.outBoard.println(String.join("\n", mainDisplay));
     }
-
-    public void process(Player player, Ressource choix, Board board)
-    {
-        if (board.getNbResource(Resource.choix)>3) {
-            player.updateNbResource(Resource.choix,2);
-        }
-    }
     
-    public void play(Player player){
-        move(player);
-        discardToken(player);
+    public void play(){
+        boolean fin = false;
+        while (fin != false) {
+            for (int i=0; i<players.size();i++){
+                move(players.get(i));
+                discardToken(players.get(i));
+            }
+            fin = isGameOver();
+        }
+        gameOver();
+        
     }
 
     private void move(Player player){
