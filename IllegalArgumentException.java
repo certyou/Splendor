@@ -1,4 +1,4 @@
-package Splendor;
+ 
 
 
 /**
@@ -15,7 +15,6 @@ public class IllegalArgumentException extends Exception
     public IllegalArgumentException()
     {
         super("Le nombre de joueur doit être compris entre 2 et 4");
-    
     }
     
     /**
@@ -24,7 +23,6 @@ public class IllegalArgumentException extends Exception
     public IllegalArgumentException(String msg)
     {
         super(msg);
-    
     }
 
     
