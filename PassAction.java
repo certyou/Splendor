@@ -23,10 +23,8 @@ public class PassAction implements Action
      * @param  y   le paramètre de la méthode
      * @return     la somme de x et de y
      */
-    public void process(Player player, Ressource choix, Board board)
+    public void process(Player player, Board board)
     {
-        if (board.getNbResource(Resource.choix)>3) {
-            player.updateNbResource(Resource.choix,2);
-        }
+        
     }
 }

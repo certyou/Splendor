@@ -1,9 +1,21 @@
 #BlueJ class context
 comment0.target=DevCard
-comment1.params=
-comment1.target=java.lang.String[]\ toStringArray()
+comment1.params=tier\ coutDIAMMOND\ coutSAPPHIRE\ coutEMERALD\ coutRUBY\ coutONYX\ points\ type
+comment1.target=DevCard(int,\ int,\ int,\ int,\ int,\ int,\ int,\ java.lang.String)
 comment2.params=
-comment2.target=java.lang.String[]\ noCardStringArray()
+comment2.target=int\ getTier()
 comment3.params=
-comment3.target=java.lang.String\ toString()
-numComments=4
+comment3.target=int\ getPoints()
+comment4.params=
+comment4.target=Resources\ getCost()
+comment5.params=
+comment5.target=Resource\ getResourceType()
+comment6.params=
+comment6.target=java.lang.String[]\ toStringArray()
+comment7.params=
+comment7.target=java.lang.String[]\ noCardStringArray()
+comment8.params=
+comment8.target=java.lang.String\ toString()
+comment9.params=card
+comment9.target=boolean\ equals(DevCard)
+numComments=10

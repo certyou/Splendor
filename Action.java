@@ -16,7 +16,7 @@ public interface Action
      * @param  y    le paramètre de cette méthode
      * @return        le résultat retourné par exempleDeMethode
      */
-    void process(Player player);
+    void process(Player player, Board board);
     
     String toString();
 }
