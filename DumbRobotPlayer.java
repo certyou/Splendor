@@ -37,9 +37,9 @@ public class DumbRobotPlayer extends Player
         }
         
         //Acheter des jetons ressources de type différents
-        Resource res1;
-        Resource res2;
-        Resource res3;
+        Resource res1 = null;
+        Resource res2 = null;;
+        Resource res3 = null;;
         for(Resource resource: board.getAvailableResources()){
            nbRes = getNbResource(resource);
            if(nbRes >= 1){
@@ -64,20 +64,20 @@ public class DumbRobotPlayer extends Player
     public Resources chooseDiscardingTokens(int nbTokenToDiscard){
         Random randomNumbers = new Random();
         ArrayList<Resource> recourceList = super.getAvailableResources();
-        Resources resources;
+        Resources resourcesRec = new Resources(0,0,0,0,0);
         Resource resource;
         int index, size = recourceList.size()-1;
         
-        for(int nbTokenToDiscard; nbTokenToDiscard == 0; nbTokenToDiscard--){
+        for(int i=0; nbTokenToDiscard == i; i++){
             index = randomNumbers.nextInt(size);
             resource = recourceList.get(index);
-            resources.updateNbResource(resources, 1);
-            if(super.getNbResource(resource) - resources.getNbResource(resource) <= 0){
+            resourcesRec.updateNbResource(resource, 1);
+            if(super.getNbResource(resource) - resourcesRec.getNbResource(resource) <= 0){
                 recourceList.remove(index);
             }
         }
         
-        return resources;
+        return resourcesRec;
     }
     
 }

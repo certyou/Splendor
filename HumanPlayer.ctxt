@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=HumanPlayer
+comment1.params=id\ name
+comment1.target=HumanPlayer(int,\ java.lang.String)
+comment2.params=board
+comment2.target=Action\ chooseAction(Board)
+comment3.params=nbTokenToDiscard
+comment3.target=Resources\ chooseDiscardingTokens(int)
+comment4.params=inputMessage\ errorMessage\ tab
+comment4.target=int\ PlayerChoice(java.lang.String,\ java.lang.String,\ int[])
+numComments=5

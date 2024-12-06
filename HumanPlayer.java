@@ -17,8 +17,13 @@ public class HumanPlayer extends Player
         super(id, name);
     }
     
-    public Action chooseAction(Board board){
-        int choice,i,j;
+    public Action chooseAction(Board board) throws IllegalArgumentException
+    {
+        int choice,i,j,cmp = 0;
+        Resource resource;
+        Resource[] resTab = {Resource.DIAMOND, Resource.SAPPHIRE, Resource.EMERALD, Resource.ONYX, Resource.RUBY};
+        Resource[] recourceTabRec = new Resource[3];
+        Resources resourcesRec = new Resources(0,0,0,0,0);
         String inputMessage, errorMessage;
         
         //Choix de l'acction à effectuer
@@ -39,34 +44,51 @@ public class HumanPlayer extends Player
             errorMessage = "Le numero de colone que vous avez entré n'est pas valide.";
             j = PlayerChoice(inputMessage, errorMessage, validInput);
             
-            return new BuyCardAction(board.getCard(i,j));
+            return new BuyCardAction(board.getCard(i-1,j-1));
         }
         //Acheter deux jetons ressources de même type
         else{if(choice == 2){
+   
+            
             
         }
         //Acheter des jetons ressources de type différents
         else{if(choice == 3){
-            
+            validInput = new int[]{1, 2, 3, 4, 5};
+            inputMessage = "Entrer le numero de la ressource que vous souhaitez récupérer:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
+            errorMessage = "Le numero de la ressource que vous avez entré n'est pas valide.";
+            while(true){
+                choice = PlayerChoice(inputMessage, errorMessage, validInput);
+                resource = resTab[choice];
+                if(board.getNbResource(resource) > 0 && resourcesRec.getNbResource(resource) == 0){
+                    recourceTabRec[cmp] = resource;
+                    resourcesRec.updateNbResource(resource, 1);
+                    cmp ++;
+                    if(cmp == 2){
+                        return new PickDiffTokensAction(recourceTabRec[0],recourceTabRec[1],recourceTabRec[2]);
+                    }
+                }
+                else{
+                    System.out.println("\nChoix invalide: vous avez choisit une ressource déjà selectionné ou qui n'est plus en stock.");
+                }
+            }
+        }
+        }
         }
         //Passer son tour
-        else{
         return new PassAction();
-        }
-        }
-        }
     }
     
     public Resources chooseDiscardingTokens(int nbTokenToDiscard){
- 
+     return null;
     }
     
-    private int PlayerChoice(String inputMessage, String errorMessage, int[] tab) throws IllegalArgumentException
+    public int PlayerChoice(String inputMessage, String errorMessage, int[] tab) throws IllegalArgumentException
     {
-        int choice;
         System.out.println(inputMessage);
         while(true){
             try{
+                int choice;
                 choice = keyBord.nextInt();
                 if(!IntStream.of(tab).anyMatch(x -> x == choice)){
                     throw new IllegalArgumentException(errorMessage);
@@ -76,7 +98,8 @@ public class HumanPlayer extends Player
                 }
             }         
             catch(InputMismatchException e1){
-                System.out.println(e1.getMessage());
+                System.out.println("Entrée invalide");
+                keyBord.nextLine(); 
             }
             catch(IllegalArgumentException e2){
                 System.out.println(e2.getMessage());

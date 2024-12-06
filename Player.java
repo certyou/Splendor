@@ -33,11 +33,7 @@ public abstract class Player implements Displayable {
     
     public int getNbResource(Resource resource){
         int counter = 0;
-        for(Resource token: resources){
-            if(token.equals(resource)){
-                counter ++;
-            }
-        }
+        counter += resources.getNbResource(resource);
         return counter;
     }
     
@@ -72,7 +68,7 @@ public abstract class Player implements Displayable {
     
     public boolean canBuyCard(DevCard card){
         boolean verif = true;
-        Resources cardCoast = card.getCout;
+        Resources cardCoast = card.getCost();
         int cardRes;
         int playerRes;
         for(Resource resource: cardCoast.getAvailableResources()){
@@ -85,7 +81,7 @@ public abstract class Player implements Displayable {
         return true;
     }
     
-    abstract Action chooseAction(Board board);
+    abstract Action chooseAction(Board board) throws IllegalArgumentException;
     abstract Resources chooseDiscardingTokens(int nbTokenToDiscard);
     
     
@@ -118,7 +114,7 @@ public abstract class Player implements Displayable {
         strPlayer[0] = "Player "+(id+1)+": "+name;
         strPlayer[1] = pointStr + "pts";
         strPlayer[2] = "";
-        for(Resource res: resources){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        for(Resource res: resources.getAvailableResources()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             strPlayer[3+(Resource.values().length-1-res.ordinal())] = res.toSymbol() + " ("+resources.getNbResource(res)+") ["+getResFromCards(res)+"]";
         }
         
