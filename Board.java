@@ -1,5 +1,3 @@
- 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Stack;
@@ -13,17 +11,17 @@ import java.util.Collections;
 public class Board implements Displayable {
     private String filename;
     private Scanner scanner;
-    private ArrayList<Stack<DevCard>> tiers;
+    private ArrayList<Stack<DevCard>> stackCards;
     private ArrayList<ArrayList<DevCard>> visibleCards;
     private Resources resources;
     
     public Board(){
         this.filename = "stats.csv";
-        tiers = new ArrayList<Stack<DevCard>>();
-        tiers.add(new Stack<DevCard>()); // noble
-        tiers.add(new Stack<DevCard>()); // t1
-        tiers.add(new Stack<DevCard>()); 
-        tiers.add(new Stack<DevCard>());
+        stackCards = new ArrayList<Stack<DevCard>>();
+        stackCards.add(new Stack<DevCard>()); // noble
+        stackCards.add(new Stack<DevCard>()); // t1
+        stackCards.add(new Stack<DevCard>()); 
+        stackCards.add(new Stack<DevCard>());
         visibleCards = new ArrayList<ArrayList<DevCard>>();
         resources = new Resources(0,0,0,0,0);
         try {
@@ -42,14 +40,14 @@ public class Board implements Displayable {
                             colonnes[7] // type
                 );    
                 
-                tiers.get(Integer.parseInt(colonnes[0])).push(new_card);
+                stackCards.get(Integer.parseInt(colonnes[0])).push(new_card);
             }
         } catch (Exception e){
             System.out.println("fichier introuvable");
         }
         
         // shuffle cards
-        for (Stack lib : tiers){
+        for (Stack lib : stackCards){
             Collections.shuffle(lib);
         }
     }
@@ -68,7 +66,7 @@ public class Board implements Displayable {
          * └────────┘ │
          *  ╲________╲│
          */
-        int nbCards = tiers.get(tier).size();
+        int nbCards = stackCards.get(tier).size();
         
         String[] deckStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  ",
                             "\u2502        \u2502\u2572 ",
@@ -177,7 +175,7 @@ public class Board implements Displayable {
     }
     
     public DevCard drawCard(int tier){
-        return tiers.get(tier).pop();
+        return stackCards.get(tier).pop();
     }
     
     public boolean canGiveSameTokens(Resource res){
