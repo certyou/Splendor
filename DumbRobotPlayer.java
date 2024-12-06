@@ -10,11 +10,14 @@ import java.util.ArrayList;
 
 public class DumbRobotPlayer extends Player
 {
-    public DumbRobotPlayer(int id, String name){
+    Board board;
+    
+    public DumbRobotPlayer(int id, String name, Board board){
         super(id, name);
+        this.board = board;
     }
     
-    public Action chooseAction(Board board){
+    public Action chooseAction(){
         //Acheter une carte sur le plateau 
         DevCard card;
         for(int i=0; i<4; i++){

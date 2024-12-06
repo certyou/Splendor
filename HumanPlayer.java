@@ -12,12 +12,14 @@ import java.util.InputMismatchException;
 public class HumanPlayer extends Player
 {
     private Scanner keyBord = new Scanner(System.in);
+    Board board;
     
-    public HumanPlayer(int id, String name){
+    public HumanPlayer(int id, String name,Board board){
         super(id, name);
+        this.board = board;
     }
     
-    public Action chooseAction(Board board) throws IllegalArgumentException
+    public Action chooseAction() throws IllegalArgumentException
     {
         int choice,i,j,cmp = 0;
         Resource resource;
@@ -28,7 +30,7 @@ public class HumanPlayer extends Player
         
         //Choix de l'acction à effectuer
         int[] validInput = {1,2,3,4};
-        inputMessage = "Choisissez votre acction:\n -1 : Acheter une carte sur le plateau \n -2 : Prendre 2 jetons ressources de même type\n -3 : Prendre 3 jetons ressources de type différents\n -4 : Passer son tour";
+        inputMessage = "\nChoisissez votre acction:\n -1 : Acheter une carte sur le plateau \n -2 : Prendre 2 jetons ressources de même type\n -3 : Prendre 3 jetons ressources de type différents\n -4 : Passer son tour";
         errorMessage = "Choix invalide";
         choice = PlayerChoice(inputMessage, errorMessage, validInput);
         
@@ -36,11 +38,11 @@ public class HumanPlayer extends Player
         if(choice == 1){
             validInput = new int[]{1, 2, 3};
             
-            inputMessage = "Entrer la ligne de la carte que vous souhaitez acheter:\n -1 : Tier 1\n -2 : Tier 2\n -3 : Tier 3";
+            inputMessage = "\nEntrer la ligne de la carte que vous souhaitez acheter:\n -1 : Tier 1\n -2 : Tier 2\n -3 : Tier 3";
             errorMessage = "Le numero de ligne que vous avez entré n'est pas valide.";
             i = PlayerChoice(inputMessage, errorMessage, validInput);
             
-            inputMessage = "Entrer la colone de la carte que vous souhaitez acheter:\n -1 : Colone de gauche\n -2 : Colone du milieu\n -3 : Colone de droite";
+            inputMessage = "\nEntrer la colone de la carte que vous souhaitez acheter:\n -1 : Colone de gauche\n -2 : Colone du milieu\n -3 : Colone de droite";
             errorMessage = "Le numero de colone que vous avez entré n'est pas valide.";
             j = PlayerChoice(inputMessage, errorMessage, validInput);
             
@@ -48,18 +50,28 @@ public class HumanPlayer extends Player
         }
         //Acheter deux jetons ressources de même type
         else{if(choice == 2){
-   
-            
-            
+            validInput = new int[]{1, 2, 3, 4, 5};
+            inputMessage = "\nEntrer le numero de la ressource que vous souhaitez récupérer:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
+            errorMessage = "Le numero de la ressource que vous avez entré n'est pas valide.";
+            while(true){
+                choice = PlayerChoice(inputMessage, errorMessage, validInput);
+                resource = resTab[choice-1];
+                if(board.getNbResource(resource) > 1 ){
+                    return new PickSameTokensAction(resource);
+                }
+                else{
+                    System.out.println("Choix invalide: vous avez choisit qui n'a plus assez de stock.");
+                }
+            }
         }
         //Acheter des jetons ressources de type différents
         else{if(choice == 3){
             validInput = new int[]{1, 2, 3, 4, 5};
-            inputMessage = "Entrer le numero de la ressource que vous souhaitez récupérer:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
+            inputMessage = "\nEntrer le numero de la ressource que vous souhaitez récupérer:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
             errorMessage = "Le numero de la ressource que vous avez entré n'est pas valide.";
             while(true){
                 choice = PlayerChoice(inputMessage, errorMessage, validInput);
-                resource = resTab[choice];
+                resource = resTab[choice-1];
                 if(board.getNbResource(resource) > 0 && resourcesRec.getNbResource(resource) == 0){
                     recourceTabRec[cmp] = resource;
                     resourcesRec.updateNbResource(resource, 1);
@@ -69,7 +81,7 @@ public class HumanPlayer extends Player
                     }
                 }
                 else{
-                    System.out.println("\nChoix invalide: vous avez choisit une ressource déjà selectionné ou qui n'est plus en stock.");
+                    System.out.println("Choix invalide: vous avez choisit une ressource déjà selectionné ou qui n'est plus en stock.");
                 }
             }
         }
@@ -79,8 +91,29 @@ public class HumanPlayer extends Player
         return new PassAction();
     }
     
-    public Resources chooseDiscardingTokens(int nbTokenToDiscard){
-     return null;
+    public Resources chooseDiscardingTokens(int nbTokenToDiscard) throws IllegalArgumentException{
+        int choice;
+        String inputMessage, errorMessage;
+        Resource[] resTab = {Resource.DIAMOND, Resource.SAPPHIRE, Resource.EMERALD, Resource.ONYX, Resource.RUBY};
+        Resources resourcesRec = new Resources(0,0,0,0,0);
+        Resource resource;
+        
+        int[] validInput = {1, 2, 3, 4, 5};
+        inputMessage = "\nEntrer le numero de la ressource que vous souhaitez récupérer:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
+        errorMessage = "Le numero de la ressource que vous avez entré n'est pas valide.";
+        
+        while(nbTokenToDiscard != 0){
+            choice = PlayerChoice(inputMessage, errorMessage, validInput);
+            resource = resTab[choice-1];
+            if(super.getNbResource(resource) - resourcesRec.getNbResource(resource) <= 0){
+                System.out.println("Choix invalide: vous avez choisit une ressource que vous n'avez plus en stock.");
+            }
+            else{
+                resourcesRec.updateNbResource(resource, 1);
+                nbTokenToDiscard --;
+            }
+        }
+        return resourcesRec;
     }
     
     public int PlayerChoice(String inputMessage, String errorMessage, int[] tab) throws IllegalArgumentException

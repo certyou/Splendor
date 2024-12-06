@@ -81,8 +81,8 @@ public abstract class Player implements Displayable {
         return true;
     }
     
-    abstract Action chooseAction(Board board) throws IllegalArgumentException;
-    abstract Resources chooseDiscardingTokens(int nbTokenToDiscard);
+    abstract Action chooseAction() throws IllegalArgumentException;
+    abstract Resources chooseDiscardingTokens(int nbTokenToDiscard) throws IllegalArgumentException;
     
     
     
