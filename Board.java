@@ -12,7 +12,7 @@ public class Board implements Displayable {
     private String filename;
     private Scanner scanner;
     private ArrayList<Stack<DevCard>> stackCards;
-    private ArrayList<ArrayList<DevCard>> visibleCards;
+    private DevCard[][] visibleCards;
     private Resources resources;
     
     public Board(){
@@ -22,7 +22,6 @@ public class Board implements Displayable {
         stackCards.add(new Stack<DevCard>()); // t1
         stackCards.add(new Stack<DevCard>()); 
         stackCards.add(new Stack<DevCard>());
-        visibleCards = new ArrayList<ArrayList<DevCard>>();
         resources = new Resources(0,0,0,0,0);
         try {
             scanner = new Scanner(new File(filename));
@@ -148,17 +147,17 @@ public class Board implements Displayable {
     }
     
     public DevCard getCard(int i, int j){
-        return visibleCards.get(i).get(j);
+        return visibleCards[i][j];
     }
     
     public void updateCard(DevCard old_card){
         int cpt=0;
-        for (DevCard card : visibleCards.get(old_card.getTier())){
+        for (DevCard card : visibleCards[old_card.getTier()]){
             if (card.equals(old_card)){
-                if (visibleCards.get(old_card.getTier()).isEmpty()){
-                    visibleCards.get(old_card.getTier()).set(cpt, null);
+                if (visibleCards[old_card.getTier()].length == 0){
+                    visibleCards[old_card.getTier()][cpt] = null;
                 } else {
-                    visibleCards.get(old_card.getTier()).set(cpt, drawCard(old_card.getTier()));
+                    visibleCards[old_card.getTier()][cpt] = drawCard(old_card.getTier());
                 }
             }
             cpt++;
@@ -167,10 +166,10 @@ public class Board implements Displayable {
     }
     
     public void updateCard(int i, int j){
-        if (visibleCards.get(i).isEmpty()){
-            visibleCards.get(i).set(j, null);
+        if (visibleCards[i].length == 0){
+            visibleCards[i][j] = null;
         } else {
-            visibleCards.get(i).set(j, drawCard(i));
+            visibleCards[i][j] =  drawCard(i);
         }
     }
     
