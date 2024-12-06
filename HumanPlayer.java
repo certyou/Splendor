@@ -56,7 +56,7 @@ public class HumanPlayer extends Player
             while(true){
                 choice = PlayerChoice(inputMessage, errorMessage, validInput);
                 resource = resTab[choice-1];
-                if(board.getNbResource(resource) > 1 ){
+                if(board.getNbResource(resource) >= 4 ){
                     return new PickSameTokensAction(resource);
                 }
                 else{

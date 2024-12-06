@@ -12,6 +12,7 @@ public abstract class Player implements Displayable {
     public Player(int id, String name){
         this.id = id;
         this.name = name;
+        resources = new Resources(0,0,0,0,0);
     }
     
     /* --- Accesseurs des atribus --- */
