@@ -106,21 +106,19 @@ public class Resources extends HashMap<Resource, Integer> {
      * precondition :
      * - ressource != null
      * - v != 0
-     * - |v| < |quantite de la dite ressource|
      * postcondition :
      * - ressource ne peut etre inférieur a 0
      */
     public void updateNbResource(Resource ressource, int v) {
-        v = Math.abs(v); // valeur absolue de v
         // préconditions
         if (ressource == null) {
-             System.out.println("ERROR : updateNbResource-ressource");
+             System.out.println("ERROR : updateNbResource-ressource, resource null");
         }
-        if (v == 0 || v>super.get(ressource)) {
-            System.out.println("ERROR : updateNbResource-new_value");
+        if (v == 0) {
+            System.out.println("ERROR : updateNbResource-new_value v=0");
         }
-        // corps
-        super.put(ressource, super.get(ressource)-v);
+        // corp
+        super.put(ressource, super.get(ressource)+v);
         // postconditions
         if (super.get(ressource) < 0) {
             super.put(ressource, 0);
