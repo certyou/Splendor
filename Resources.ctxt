@@ -12,7 +12,7 @@ comment3.target=void\ setNbResource(Resource,\ int)
 comment3.text=\ Setter\ pour\ les\ ressources\n\ \n\ input\ \:\n\ -\ ressource\ |\ une\ ressource\n\ -\ new_value\ |\ une\ nouvelle\ quantit\u00E9\ pour\ la\ dite\ ressource\n\ output\ \:\n\ \n\ precondition\ \:\n\ -\ ressource\ \!\=\ null\n\ -\ new_value\ >\=\ 0\n\ postcondition\ \:\n\ \n
 comment4.params=ressource\ v
 comment4.target=void\ updateNbResource(Resource,\ int)
-comment4.text=\ retire\ {v}\ a\ la\ ressource\ {ressource}\n\ \n\ input\ \:\ \n\ -\ ressource\ |\ une\ ressource\n\ output\ \:\ \n\ \n\ precondition\ \:\n\ -\ ressource\ \!\=\ null\n\ -\ v\ \!\=\ 0\n\ -\ |v|\ <\ |quantite\ de\ la\ dite\ ressource|\n\ postcondition\ \:\n\ -\ ressource\ ne\ peut\ etre\ inf\u00E9rieur\ a\ 0\n
+comment4.text=\ retire\ {v}\ a\ la\ ressource\ {ressource}\n\ \n\ input\ \:\ \n\ -\ ressource\ |\ une\ ressource\n\ output\ \:\ \n\ \n\ precondition\ \:\n\ -\ ressource\ \!\=\ null\n\ -\ v\ \!\=\ 0\n\ postcondition\ \:\n\ -\ ressource\ ne\ peut\ etre\ inf\u00E9rieur\ a\ 0\n
 comment5.params=
 comment5.target=java.util.ArrayList\ getAvailableResources()
 comment5.text=\ renvoi\ la\ liste\ des\ ressources\ qui\ sont\ disponible\n\ \n\ input\ \:\ \n\ output\ \:\ liste\ des\ Ressources\ disponible\n\ precondition\ \:\n\ postcondition\ \:\n
