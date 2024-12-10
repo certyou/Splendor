@@ -28,7 +28,7 @@ public class HumanPlayer extends Player
         Resources resourcesRec = new Resources(0,0,0,0,0);
         String inputMessage, errorMessage;
         
-        Game.display.out.println("==== Tour de " + super.getName() + " ====");
+        Game.display.out.println("\n==== Tour de " + super.getName() + " ====");
         
         //Choix de l'acction à effectuer
         int[] validInput = {1,2,3,4};
@@ -54,6 +54,8 @@ public class HumanPlayer extends Player
                 }
                 else{
                     Game.display.out.println("Choix invalide: vous n'avez pas assez de ressource pour acheter cette carte.");
+                    chooseAction();
+                    break;
                 }
             }
         }
@@ -70,6 +72,8 @@ public class HumanPlayer extends Player
                 }
                 else{
                     Game.display.out.println("Choix invalide: vous avez choisit une ressource qui n'a plus assez de stock.");
+                    chooseAction();
+                    break;
                 }
             }
         }
@@ -91,6 +95,8 @@ public class HumanPlayer extends Player
                 }
                 else{
                     Game.display.out.println("Choix invalide: vous avez choisit une ressource déjà selectionné ou qui n'est plus en stock.");
+                    chooseAction();
+                    break;
                 }
             }
         }
