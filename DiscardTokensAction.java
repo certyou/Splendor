@@ -23,7 +23,7 @@ public class DiscardTokensAction implements Action
      * @param  y   le paramètre de la méthode
      * @return     la somme de x et de y
      */
-    public void process(Player player, Board board)
+    public void process(Player player, Board board) throws IllegalArgumentException
     {
         
         Resources res = player.chooseDiscardingTokens(nb_res);

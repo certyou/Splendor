@@ -25,7 +25,7 @@ public class Game extends Exception {
     private Scanner scan = new Scanner(System.in);
     private static int id; 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException{
         //-- à modifier pour permettre plusieurs scénarios de jeu
         display.outBoard.println("Bienvenue sur Splendor !");
         Game game = new Game(2);
@@ -82,7 +82,7 @@ public class Game extends Exception {
         display.outBoard.println(String.join("\n", mainDisplay));
     }
     
-    public void play(){
+    public void play() throws IllegalArgumentException{
         boolean fin = false;
         while (fin != false) {
             for (int i=0; i<players.size();i++){
@@ -95,8 +95,8 @@ public class Game extends Exception {
         
     }
 
-    private void move(Player player){
-        Action choix = player.chooseAction(board);
+    private void move(Player player) throws IllegalArgumentException{
+        Action choix = player.chooseAction();
         choix.process(player, board);
     }
 
