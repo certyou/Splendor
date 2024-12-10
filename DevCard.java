@@ -11,6 +11,7 @@ public class DevCard implements Displayable {
         this.tier = tier;
         this.cost = new Resources(coutDIAMMOND, coutSAPPHIRE, coutEMERALD, coutRUBY, coutONYX);
         this.points = points;
+        System.out.println(type);
         switch(type) {
           case "DIAMOND":
             this.resourceType = Resource.DIAMOND;
@@ -62,7 +63,7 @@ public class DevCard implements Displayable {
             pointStr = new String(new int[] {getPoints()+9311}, 0, 1);
         }
         String[] cardStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510",
-                            //"\u2502"+pointStr+"    "+resourceType.toSymbol()+"\u2502",
+                            "\u2502"+pointStr+"    "+resourceType.toSymbol()+"\u2502",
                             "\u2502        \u2502",
                             "\u2502        \u2502",
                             "\u2502        \u2502",
@@ -71,14 +72,14 @@ public class DevCard implements Displayable {
                             "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"};
         //update cost of the repr
         int i=6;
-        /*
+        
         for(Resource res : Resource.values()){ //-- parcourir l'ensemble des resources (res)en utilisant l'énumération Resource
             if(getCost().getNbResource(res)>0){
                 cardStr[i] = "\u2502"+getCost().getNbResource(res)+" "+res.toSymbol()+"    \u2502";
                 i--;
             }
         }
-        */
+        
         return cardStr;
     }
 
