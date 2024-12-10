@@ -17,21 +17,29 @@ public class Board implements Displayable {
     private DevCard[][] visibleCards;
     private Resources resources;
     
+    /* constructeur de la classe Board
+     * 
+     * input : /
+     * output : /
+     * precondition :
+     *  - possède un fichier stats.csv respectant un format précis (tier, coutDIAMOND, coutSAPPHIRE, coutEMERALD, coutRUBY, coutONYX, points, type)
+     * postcondition :
+     *  - initialise visibleCards, stackCards et resources
+     * 
+     */
     public Board(){
-        visibleCards = new DevCard[3][3];
+        visibleCards = new DevCard[3][4];
         this.filename = "stats.csv";
-        
         stackCards = new ArrayList<Stack<DevCard>>();
         stackCards.add(new Stack<DevCard>()); // noble
         stackCards.add(new Stack<DevCard>()); // tier 1
         stackCards.add(new Stack<DevCard>()); // tier 2
         stackCards.add(new Stack<DevCard>()); // tier 3
-
         resources = new Resources(0,0,0,0,0);
         
         try {
             scanner = new Scanner(new File(filename));
-            String new_raw = scanner.nextLine();
+            String new_raw = scanner.nextLine(); // skip the first line
             while (scanner.hasNextLine()){
                 new_raw = scanner.nextLine();
                 String[] colonnes = new_raw.split(",");
@@ -60,6 +68,17 @@ public class Board implements Displayable {
     }
 
     /* --- Stringers --- */
+    /* stringer pour les decks de tier
+     * 
+     * input :
+     *  - tier | int
+     * output :
+     *  - deckStr | String
+     * precondition :
+     * - tier doit être compris entre 1 et 3
+     * postcondition : /
+     * 
+     */
     private String[] deckToStringArray(int tier){
         /** EXAMPLE
          * ┌────────┐
