@@ -10,14 +10,17 @@ public abstract class Player implements Displayable {
     private Resources resources;
     
     public Player(int id, String name){
+        purchasedCards = new ArrayList<DevCard>();
         this.id = id;
         this.name = name;
         resources = new Resources(0,0,0,0,0);
+        purchasedCards = new ArrayList<>();
     }
     
     /* --- Accesseurs des atribus --- */
     public String getName(){return name;}
     public int getPoints(){return points;}
+    public int getId(){return id;}
     
     /* --- Accesseurs généraux --- */
     public int getNbTokens(){
@@ -115,7 +118,7 @@ public abstract class Player implements Displayable {
         strPlayer[0] = "Player "+(id+1)+": "+name;
         strPlayer[1] = pointStr + "pts";
         strPlayer[2] = "";
-        for(Resource res: resources.getAvailableResources()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        for(Resource res: Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             strPlayer[3+(Resource.values().length-1-res.ordinal())] = res.toSymbol() + " ("+resources.getNbResource(res)+") ["+getResFromCards(res)+"]";
         }
         

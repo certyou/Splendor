@@ -51,8 +51,6 @@ public class Game extends Exception {
         players.add(joueur1);
         id+=1;
         
-        
-        
         for(int i = 0 ; i<nbOfPlayers-1;i++) {
             Game.display.out.println("Veuillez rentrer un nom : ");
             name = scan.next();
@@ -87,9 +85,7 @@ public class Game extends Exception {
         boolean fin = false;
         while (fin != true) {
             for (int i=0; i<players.size();i++){
-                for (int j=0; j<board.toStringArray().length;j++) {
-                    Game.display.outBoard.println(board.toStringArray()[j]);
-                }
+                display(players.get(i).getId());
                 Game.display.outBoard.println();
                 move(players.get(i));
                 discardToken(players.get(i));
