@@ -38,15 +38,22 @@ public class HumanPlayer extends Player
         if(choice == 1){
             validInput = new int[]{1, 2, 3};
             
-            inputMessage = "\nEntrer la ligne de la carte que vous souhaitez acheter:\n -1 : Tier 1\n -2 : Tier 2\n -3 : Tier 3";
-            errorMessage = "Le numero de ligne que vous avez entré n'est pas valide.";
-            i = PlayerChoice(inputMessage, errorMessage, validInput);
-            
-            inputMessage = "\nEntrer la colone de la carte que vous souhaitez acheter:\n -1 : Colone de gauche\n -2 : Colone du milieu\n -3 : Colone de droite";
-            errorMessage = "Le numero de colone que vous avez entré n'est pas valide.";
-            j = PlayerChoice(inputMessage, errorMessage, validInput);
-            
-            return new BuyCardAction(board.getCard(i-1,j-1));
+            while(true){
+                inputMessage = "\nEntrer la ligne de la carte que vous souhaitez acheter:\n -1 : Tier 1\n -2 : Tier 2\n -3 : Tier 3";
+                errorMessage = "Le numero de ligne que vous avez entré n'est pas valide.";
+                i = PlayerChoice(inputMessage, errorMessage, validInput);
+                
+                inputMessage = "\nEntrer la colone de la carte que vous souhaitez acheter:\n -1 : Colone de gauche\n -2 : Colone du milieu\n -3 : Colone de droite";
+                errorMessage = "Le numero de colone que vous avez entré n'est pas valide.";
+                j = PlayerChoice(inputMessage, errorMessage, validInput);
+                
+                if(canBuyCard(board.getCard(i-1,j-1))){
+                    return new BuyCardAction(board.getCard(i-1,j-1));
+                }
+                else{
+                    System.out.println("Choix invalide: vous n'avez pas assez de ressource pour acheter cette carte.");
+                }
+            }
         }
         //Acheter deux jetons ressources de même type
         else{if(choice == 2){
