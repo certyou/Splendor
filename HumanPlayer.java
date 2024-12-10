@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 
 public class HumanPlayer extends Player
 {
-    private Scanner keyBord = new Scanner(System.in);
+    private Scanner keyBord = new Scanner(Game.display.in);
     private Board board;
     
     public HumanPlayer(int id, String name,Board board){
@@ -51,7 +51,7 @@ public class HumanPlayer extends Player
                     return new BuyCardAction(board.getCard(i-1,j-1));
                 }
                 else{
-                    System.out.println("Choix invalide: vous n'avez pas assez de ressource pour acheter cette carte.");
+                    Game.display.out.println("Choix invalide: vous n'avez pas assez de ressource pour acheter cette carte.");
                 }
             }
         }
@@ -67,7 +67,7 @@ public class HumanPlayer extends Player
                     return new PickSameTokensAction(resource);
                 }
                 else{
-                    System.out.println("Choix invalide: vous avez choisit qui n'a plus assez de stock.");
+                    Game.display.out.println("Choix invalide: vous avez choisit qui n'a plus assez de stock.");
                 }
             }
         }
@@ -88,7 +88,7 @@ public class HumanPlayer extends Player
                     }
                 }
                 else{
-                    System.out.println("Choix invalide: vous avez choisit une ressource déjà selectionné ou qui n'est plus en stock.");
+                    Game.display.out.println("Choix invalide: vous avez choisit une ressource déjà selectionné ou qui n'est plus en stock.");
                 }
             }
         }
@@ -113,7 +113,7 @@ public class HumanPlayer extends Player
             choice = PlayerChoice(inputMessage, errorMessage, validInput);
             resource = resTab[choice-1];
             if(super.getNbResource(resource) - resourcesRec.getNbResource(resource) <= 0){
-                System.out.println("Choix invalide: vous avez choisit une ressource que vous n'avez plus en stock.");
+                Game.display.out.println("Choix invalide: vous avez choisit une ressource que vous n'avez plus en stock.");
             }
             else{
                 resourcesRec.updateNbResource(resource, 1);
@@ -125,7 +125,7 @@ public class HumanPlayer extends Player
     
     public int PlayerChoice(String inputMessage, String errorMessage, int[] tab) throws IllegalArgumentException
     {
-        System.out.println(inputMessage);
+        Game.display.out.println(inputMessage);
         while(true){
             try{
                 int choice;
@@ -138,11 +138,11 @@ public class HumanPlayer extends Player
                 }
             }         
             catch(InputMismatchException e1){
-                System.out.println("Entrée invalide");
+                Game.display.out.println("Entrée invalide");
                 keyBord.nextLine(); 
             }
             catch(IllegalArgumentException e2){
-                System.out.println(e2.getMessage());
+                Game.display.out.println(e2.getMessage());
             }
         }
     }
