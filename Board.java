@@ -28,7 +28,7 @@ public class Board implements Displayable {
      * 
      */
     public Board(){
-        visibleCards = new DevCard[3][3];
+        visibleCards = new DevCard[3][4];
         this.filename = "stats.csv";
         stackCards = new ArrayList<Stack<DevCard>>();
         stackCards.add(new Stack<DevCard>()); // noble

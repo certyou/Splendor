@@ -7,7 +7,7 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.InputMismatchException;
+import java.util.InputMismatchException; 
 
 public class Game extends Exception {
     /* L'affichage et la lecture d'entrée avec l'interface de jeu se fera entièrement via l'attribut display de la classe Game.
