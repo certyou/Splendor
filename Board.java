@@ -104,7 +104,7 @@ public class Board implements Displayable {
 
         //Deck display
         String[] deckDisplay = Display.emptyStringArray(0, 0);
-        for(int i=stackCards.size();i>0;i--){
+        for(int i=stackCards.size()-1;i>0;i--){
             deckDisplay = Display.concatStringArray(deckDisplay, deckToStringArray(i), true);
         }
 
