@@ -31,8 +31,9 @@ public class Board implements Displayable {
         
         try {
             scanner = new Scanner(new File(filename));
+            String new_raw = scanner.nextLine();
             while (scanner.hasNextLine()){
-                String new_raw = scanner.nextLine();
+                new_raw = scanner.nextLine();
                 String[] colonnes = new_raw.split(",");
                 // Création d'une nouvelle carte DevCard à partir des données lues
                 DevCard new_card = new DevCard(
@@ -49,7 +50,7 @@ public class Board implements Displayable {
                 stackCards.get(Integer.parseInt(colonnes[0])).push(new_card);
             }
         } catch (Exception e){
-            System.out.println("fichier introuvable");
+            System.out.println(e);
         }
         
         // Mélange les cartes de chaque piles
