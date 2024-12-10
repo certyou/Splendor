@@ -12,7 +12,7 @@ import java.util.InputMismatchException;
 public class HumanPlayer extends Player
 {
     private Scanner keyBord = new Scanner(System.in);
-    Board board;
+    private Board board;
     
     public HumanPlayer(int id, String name,Board board){
         super(id, name);
