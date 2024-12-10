@@ -1,4 +1,3 @@
-
 /**
  * Décrivez votre classe DiscardTokensAction ici.
  *
@@ -7,31 +6,15 @@
  */
 public class DiscardTokensAction implements Action
 {
-    private Resource res1 = null;
-    private Resource res2 = null;
-    private Resource res3 = null;
+    private int nb_res = 0;
 
     /**
      * Constructeur d'objets de classe DiscardTokensAction
      */
     
-    public DiscardTokensAction(Resource res1)
+    public DiscardTokensAction(int nb_res)
     {
-        this.res1 = res1;
-    }
-    
-    
-    public DiscardTokensAction(Resource res1,Resource res2)
-    {
-        this.res1 = res1;
-        this.res2 = res2;
-    }
-    
-    public DiscardTokensAction(Resource res1,Resource res2, Resource res3)
-    {
-        this.res1 = res1;
-        this.res2 = res2;
-        this.res3 = res3;
+        this.nb_res = nb_res;
     }
 
     /**
@@ -42,12 +25,11 @@ public class DiscardTokensAction implements Action
      */
     public void process(Player player, Board board)
     {
-        player.updateNbResource(res1,-1);
-        if (res2 != null) {
-            player.updateNbResource(res2,-1);
-        }
-        if (res3 != null) {
-            player.updateNbResource(res3,-1);
+        
+        Resources res = player.chooseDiscardingTokens(nb_res);
+        
+        for (Resource resource : res.getAvailableResources()) {
+            player.updateNbResource(resource, -res.getNbResource(resource));
         }
     }
 }
