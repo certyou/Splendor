@@ -45,6 +45,7 @@ public class Game extends Exception {
         
     
         String name;
+        System.out.println("Veuillez rentrer un nom : ");
         name = scan.next();
         HumanPlayer joueur1 = new HumanPlayer(id, name, board);
         players.add(joueur1);
@@ -52,7 +53,7 @@ public class Game extends Exception {
         
         
         
-        for(int i = 0 ; i<nbOfPlayers-1;i++) {
+        for(int i = 0 ; i<nbOfPlayers;i++) {
             System.out.println("Veuillez rentrer un nom : ");
             name = scan.next();
             DumbRobotPlayer robot = new DumbRobotPlayer(id, name, board);
