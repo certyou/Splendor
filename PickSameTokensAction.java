@@ -28,7 +28,7 @@ public class PickSameTokensAction implements Action
     {
         if (board.getNbResource(res)>3) {
             player.updateNbResource(res,2);
-            board.updateNbResource (res,-2);
+            board.updateNbResource(res,-2);
         }
     }
 }

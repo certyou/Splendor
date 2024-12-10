@@ -1,5 +1,3 @@
- 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Stack;
@@ -13,18 +11,17 @@ import java.util.Collections;
 public class Board implements Displayable {
     private String filename;
     private Scanner scanner;
-    private ArrayList<Stack<DevCard>> tiers;
-    private ArrayList<ArrayList<DevCard>> visibleCards;
+    private ArrayList<Stack<DevCard>> stackCards;
+    private DevCard[][] visibleCards;
     private Resources resources;
     
     public Board(){
         this.filename = "stats.csv";
-        tiers = new ArrayList<Stack<DevCard>>();
-        tiers.add(new Stack<DevCard>()); // noble
-        tiers.add(new Stack<DevCard>()); // t1
-        tiers.add(new Stack<DevCard>()); 
-        tiers.add(new Stack<DevCard>());
-        visibleCards = new ArrayList<ArrayList<DevCard>>();
+        stackCards = new ArrayList<Stack<DevCard>>();
+        stackCards.add(new Stack<DevCard>()); // noble
+        stackCards.add(new Stack<DevCard>()); // tier 1
+        stackCards.add(new Stack<DevCard>()); // tier 2
+        stackCards.add(new Stack<DevCard>()); // tier 3
         resources = new Resources(0,0,0,0,0);
         try {
             scanner = new Scanner(new File(filename));
@@ -42,14 +39,14 @@ public class Board implements Displayable {
                             colonnes[7] // type
                 );    
                 
-                tiers.get(Integer.parseInt(colonnes[0])).push(new_card);
+                stackCards.get(Integer.parseInt(colonnes[0])).push(new_card);
             }
         } catch (Exception e){
             System.out.println("fichier introuvable");
         }
         
         // shuffle cards
-        for (Stack lib : tiers){
+        for (Stack lib : stackCards){
             Collections.shuffle(lib);
         }
     }
@@ -68,7 +65,7 @@ public class Board implements Displayable {
          * └────────┘ │
          *  ╲________╲│
          */
-        int nbCards = tiers.get(tier).size();
+        int nbCards = stackCards.get(tier).size();
         
         String[] deckStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  ",
                             "\u2502        \u2502\u2572 ",
@@ -87,20 +84,16 @@ public class Board implements Displayable {
          * Resources disponibles : 4♥R 4♣E 4♠S 4♦D 4●O
          */
         String[] resStr = {"Resources disponibles : "};
-        /*
-         * A decommenter
-        for(ACOMPLETER){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        
+        for(Resource res : Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             resStr[0] += resources.getNbResource(res)+res.toSymbol()+" ";
         }
-                 */
         resStr[0] += "        ";
         return resStr;
     }
 
     private String[] boardToStringArray(){
         String[] res = Display.emptyStringArray(0, 0);
-        /*
-         * 
 
         //Deck display
         String[] deckDisplay = Display.emptyStringArray(0, 0);
@@ -110,9 +103,9 @@ public class Board implements Displayable {
 
         //Card display
         String[] cardDisplay = Display.emptyStringArray(0, 0);
-        for(ACOMPLETER){ //-- parcourir les différents niveaux de carte (i)
+        for(int i=0;i<3;i++){ //-- parcourir les différents niveaux de carte (i)
             String[] tierCardsDisplay = Display.emptyStringArray(8, 0);
-            for(ACOMPLETER){ //-- parcourir les 4 cartes faces visibles pour un niveau donné (j)
+            for(int j=0;j<4;j++){ //-- parcourir les 4 cartes faces visibles pour un niveau donné (j)
                 tierCardsDisplay = Display.concatStringArray(tierCardsDisplay, visibleCards[i][j]!=null ? visibleCards[i][j].toStringArray() : DevCard.noCardStringArray(), false);
             }
             cardDisplay = Display.concatStringArray(cardDisplay, Display.emptyStringArray(1, 40), true);
@@ -124,7 +117,7 @@ public class Board implements Displayable {
         res = Display.concatStringArray(res, resourcesToStringArray(), true);
         res = Display.concatStringArray(res, Display.emptyStringArray(35, 1, " \u250A"), false);
         res = Display.concatStringArray(res, Display.emptyStringArray(1, 54, "\u2509"), true);
-                 */
+    
         return res;
     }
 
@@ -140,23 +133,27 @@ public class Board implements Displayable {
     public void setNbResource(Resource res, int new_value){
         resources.setNbResource(res, new_value);
     }
+
+    public void updateNbResource(Resource res, int v){
+        resources.updateNbResource(res, v);
+    }
     
     public ArrayList<Resource> getAvailableResources(){
         return resources.getAvailableResources();
     }
     
     public DevCard getCard(int i, int j){
-        return visibleCards.get(i).get(j);
+        return visibleCards[i][j];
     }
     
     public void updateCard(DevCard old_card){
         int cpt=0;
-        for (DevCard card : visibleCards.get(old_card.getTier())){
+        for (DevCard card : visibleCards[old_card.getTier()]){
             if (card.equals(old_card)){
-                if (visibleCards.get(old_card.getTier()).isEmpty()){
-                    visibleCards.get(old_card.getTier()).set(cpt, null);
+                if (visibleCards[old_card.getTier()].length == 0){
+                    visibleCards[old_card.getTier()][cpt] = null;
                 } else {
-                    visibleCards.get(old_card.getTier()).set(cpt, drawCard(old_card.getTier()));
+                    visibleCards[old_card.getTier()][cpt] = drawCard(old_card.getTier());
                 }
             }
             cpt++;
@@ -165,15 +162,15 @@ public class Board implements Displayable {
     }
     
     public void updateCard(int i, int j){
-        if (visibleCards.get(i).isEmpty()){
-            visibleCards.get(i).set(j, null);
+        if (visibleCards[i].length == 0){
+            visibleCards[i][j] = null;
         } else {
-            visibleCards.get(i).set(j, drawCard(i));
+            visibleCards[i][j] =  drawCard(i);
         }
     }
     
     public DevCard drawCard(int tier){
-        return tiers.get(tier).pop();
+        return stackCards.get(tier).pop();
     }
     
     public boolean canGiveSameTokens(Resource res){
