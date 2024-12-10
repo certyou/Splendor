@@ -84,20 +84,16 @@ public class Board implements Displayable {
          * Resources disponibles : 4♥R 4♣E 4♠S 4♦D 4●O
          */
         String[] resStr = {"Resources disponibles : "};
-        /*
-         * A decommenter
-        for(ACOMPLETER){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        
+        for(Resource res : Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             resStr[0] += resources.getNbResource(res)+res.toSymbol()+" ";
         }
-                 */
         resStr[0] += "        ";
         return resStr;
     }
 
     private String[] boardToStringArray(){
         String[] res = Display.emptyStringArray(0, 0);
-        /*
-         * 
 
         //Deck display
         String[] deckDisplay = Display.emptyStringArray(0, 0);
@@ -107,9 +103,9 @@ public class Board implements Displayable {
 
         //Card display
         String[] cardDisplay = Display.emptyStringArray(0, 0);
-        for(ACOMPLETER){ //-- parcourir les différents niveaux de carte (i)
+        for(int i=0;i<3;i++){ //-- parcourir les différents niveaux de carte (i)
             String[] tierCardsDisplay = Display.emptyStringArray(8, 0);
-            for(ACOMPLETER){ //-- parcourir les 4 cartes faces visibles pour un niveau donné (j)
+            for(int j=0;j<4;j++){ //-- parcourir les 4 cartes faces visibles pour un niveau donné (j)
                 tierCardsDisplay = Display.concatStringArray(tierCardsDisplay, visibleCards[i][j]!=null ? visibleCards[i][j].toStringArray() : DevCard.noCardStringArray(), false);
             }
             cardDisplay = Display.concatStringArray(cardDisplay, Display.emptyStringArray(1, 40), true);
@@ -121,7 +117,7 @@ public class Board implements Displayable {
         res = Display.concatStringArray(res, resourcesToStringArray(), true);
         res = Display.concatStringArray(res, Display.emptyStringArray(35, 1, " \u250A"), false);
         res = Display.concatStringArray(res, Display.emptyStringArray(1, 54, "\u2509"), true);
-                 */
+    
         return res;
     }
 
