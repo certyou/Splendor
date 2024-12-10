@@ -19,9 +19,9 @@ public class Board implements Displayable {
         this.filename = "stats.csv";
         stackCards = new ArrayList<Stack<DevCard>>();
         stackCards.add(new Stack<DevCard>()); // noble
-        stackCards.add(new Stack<DevCard>()); // t1
-        stackCards.add(new Stack<DevCard>()); 
-        stackCards.add(new Stack<DevCard>());
+        stackCards.add(new Stack<DevCard>()); // tier 1
+        stackCards.add(new Stack<DevCard>()); // tier 2
+        stackCards.add(new Stack<DevCard>()); // tier 3
         resources = new Resources(0,0,0,0,0);
         try {
             scanner = new Scanner(new File(filename));
