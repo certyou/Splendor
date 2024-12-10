@@ -87,6 +87,7 @@ public class Game extends Exception {
         boolean fin = false;
         while (fin != true) {
             for (int i=0; i<players.size();i++){
+                Game.display.outBoard.clean();
                 for (int j=0; j<board.toStringArray().length;j++) {
                     Game.display.outBoard.println(board.toStringArray()[j]);
                 }

@@ -10,6 +10,7 @@ public abstract class Player implements Displayable {
     private Resources resources;
     
     public Player(int id, String name){
+        purchasedCards = new ArrayList<DevCard>();
         this.id = id;
         this.name = name;
         resources = new Resources(0,0,0,0,0);

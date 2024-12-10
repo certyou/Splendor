@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Board
-comment1.params=
-comment1.target=Board()
+comment1.params=nb_player
+comment1.target=Board(int)
 comment1.text=\ constructeur\ de\ la\ classe\ Board\r\n\ \r\n\ input\ \:\ /\r\n\ output\ \:\ /\r\n\ precondition\ \:\r\n\ \ -\ poss\u00E8de\ un\ fichier\ stats.csv\ respectant\ un\ format\ pr\u00E9cis\ (tier,\ coutDIAMOND,\ coutSAPPHIRE,\ coutEMERALD,\ coutRUBY,\ coutONYX,\ points,\ type)\r\n\ postcondition\ \:\r\n\ \ -\ initialise\ visibleCards,\ stackCards\ et\ resources\r\n\ \r\n
 comment10.params=i\ j
 comment10.target=DevCard\ getCard(int,\ int)
