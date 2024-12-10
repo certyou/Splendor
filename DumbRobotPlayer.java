@@ -19,7 +19,7 @@ public class DumbRobotPlayer extends Player
     
     public Action chooseAction(){
         //Acheter une carte sur le plateau 
-        Game.display.out.println("==== Tour de " + super.getName() + " ====");
+        Game.display.out.println("\n==== Tour de " + super.getName() + " ====");
         
         DevCard card;
         for(int i=1; i<4; i++){
@@ -35,7 +35,7 @@ public class DumbRobotPlayer extends Player
         int nbRes;
         for(Resource resource: board.getAvailableResources())
         {
-            nbRes = getNbResource(resource);
+            nbRes = board.getNbResource(resource);
             if(nbRes >= 4){
                 return new PickSameTokensAction(resource);
             }
@@ -46,7 +46,7 @@ public class DumbRobotPlayer extends Player
         Resource res2 = null;;
         Resource res3 = null;;
         for(Resource resource: board.getAvailableResources()){
-           nbRes = getNbResource(resource);
+           nbRes = board.getNbResource(resource);
            if(nbRes >= 1){
                if(res1 == null){
                    res1 = resource;
