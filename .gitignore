@@ -1,8 +1,2 @@
-
-package.bluej
-.DS_Store
-Action.ctxt
-Board.ctxt
-Action.ctxt
-PassAction.ctxt
-PickSameTokensAction.ctxt
+*.ctxt
+*.class
