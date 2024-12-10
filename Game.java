@@ -39,7 +39,7 @@ public class Game extends Exception {
             throw new IllegalArgumentException();
         }
         
-        board = new Board();
+        board = new Board(nbOfPlayers);
         players = new ArrayList<Player>();
         id = 1;
         
