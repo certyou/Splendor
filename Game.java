@@ -22,7 +22,7 @@ public class Game extends Exception {
     
     private Board board;
     private ArrayList<Player> players;
-    private Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(Game.display.in);
     private static int id; 
 
     public static void main(String[] args) throws IllegalArgumentException{
@@ -36,7 +36,7 @@ public class Game extends Exception {
     public Game(int nbOfPlayers) throws IllegalArgumentException 
     {
         if (nbOfPlayers<2 || nbOfPlayers>4) {
-            throw new IllegalArgumentException(); 
+            throw new IllegalArgumentException();
         }
         
         board = new Board();
@@ -45,6 +45,7 @@ public class Game extends Exception {
         
     
         String name;
+        Game.display.out.println("Veuillez rentrer un nom : ");
         name = scan.next();
         HumanPlayer joueur1 = new HumanPlayer(id, name, board);
         players.add(joueur1);
@@ -53,7 +54,7 @@ public class Game extends Exception {
         
         
         for(int i = 0 ; i<nbOfPlayers-1;i++) {
-            System.out.println("Veuillez rentrer un nom : ");
+            Game.display.out.println("Veuillez rentrer un nom : ");
             name = scan.next();
             DumbRobotPlayer robot = new DumbRobotPlayer(id, name, board);
             players.add(robot);
@@ -84,7 +85,7 @@ public class Game extends Exception {
     
     public void play() throws IllegalArgumentException{
         boolean fin = false;
-        while (fin != false) {
+        while (fin != true) {
             for (int i=0; i<players.size();i++){
                 move(players.get(i));
                 discardToken(players.get(i));
@@ -129,7 +130,7 @@ public class Game extends Exception {
                 }
             }
         }
-        System.out.println("Bravo à " + gagnant +" vous avez gagné");
+        Game.display.outBoard.println("Bravo à " + gagnant +" vous avez gagné");
     }
 
 
