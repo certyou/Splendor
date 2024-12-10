@@ -73,9 +73,9 @@ public class Board implements Displayable {
             Collections.shuffle(lib);
         }
         
-        for (int i=1; i<4; i++){
+        for (int i=3; i>0; i--){
             for (int j=0; j<4; j++){
-                visibleCards[i-1][j] = drawCard(i);
+                visibleCards[3-i][j] = drawCard(i);
             }
         }
     }

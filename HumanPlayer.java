@@ -82,6 +82,7 @@ public class HumanPlayer extends Player
             validInput = new int[]{1, 2, 3, 4, 5};
             inputMessage = "\nEntrer le numero de la ressource que vous souhaitez récupérer:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
             errorMessage = "Le numero de la ressource que vous avez entré n'est pas valide.";
+            cmp = 0;
             while(true){
                 choice = PlayerChoice(inputMessage, errorMessage, validInput);
                 resource = resTab[choice-1];
@@ -89,7 +90,7 @@ public class HumanPlayer extends Player
                     recourceTabRec[cmp] = resource;
                     resourcesRec.updateNbResource(resource, 1);
                     cmp ++;
-                    if(cmp == 2){
+                    if(cmp == 3){
                         return new PickDiffTokensAction(recourceTabRec[0],recourceTabRec[1],recourceTabRec[2]);
                     }
                 }
