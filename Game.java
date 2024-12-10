@@ -87,6 +87,7 @@ public class Game extends Exception {
         boolean fin = false;
         while (fin != true) {
             for (int i=0; i<players.size();i++){
+                board.toStringArray();
                 move(players.get(i));
                 discardToken(players.get(i));
             }
