@@ -8,26 +8,33 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Collections;
 
+// Définition de la classe Board, qui représente le plateau de jeu et implémente l'interface Displayable.
 public class Board implements Displayable {
+    // attribut de la classe
     private String filename;
-    private Scanner scanner;
+    private Scanner scanner; // Scanner pour lire les données du fichier
     private ArrayList<Stack<DevCard>> stackCards;
     private DevCard[][] visibleCards;
     private Resources resources;
     
     public Board(){
+        visibleCards = new DevCard[3][3];
         this.filename = "stats.csv";
+        
         stackCards = new ArrayList<Stack<DevCard>>();
         stackCards.add(new Stack<DevCard>()); // noble
         stackCards.add(new Stack<DevCard>()); // tier 1
         stackCards.add(new Stack<DevCard>()); // tier 2
         stackCards.add(new Stack<DevCard>()); // tier 3
+
         resources = new Resources(0,0,0,0,0);
+        
         try {
             scanner = new Scanner(new File(filename));
             while (scanner.hasNextLine()){
                 String new_raw = scanner.nextLine();
                 String[] colonnes = new_raw.split(",");
+                // Création d'une nouvelle carte DevCard à partir des données lues
                 DevCard new_card = new DevCard(
                             Integer.parseInt(colonnes[0]), // tier
                             Integer.parseInt(colonnes[1]), // diammond
@@ -38,21 +45,20 @@ public class Board implements Displayable {
                             Integer.parseInt(colonnes[6]), // points
                             colonnes[7] // type
                 );    
-                
+                // Ajout de la carte dans la pile correspondante (selon son tier)
                 stackCards.get(Integer.parseInt(colonnes[0])).push(new_card);
             }
         } catch (Exception e){
             System.out.println("fichier introuvable");
         }
         
-        // shuffle cards
+        // Mélange les cartes de chaque piles
         for (Stack lib : stackCards){
             Collections.shuffle(lib);
         }
     }
 
     /* --- Stringers --- */
-
     private String[] deckToStringArray(int tier){
         /** EXAMPLE
          * ┌────────┐
