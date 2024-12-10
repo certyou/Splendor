@@ -36,7 +36,7 @@ public class Game extends Exception {
     public Game(int nbOfPlayers) throws IllegalArgumentException 
     {
         if (nbOfPlayers<2 || nbOfPlayers>4) {
-            throw new IllegalArgumentException(); 
+            throw new IllegalArgumentException();
         }
         
         board = new Board();
@@ -85,7 +85,7 @@ public class Game extends Exception {
     
     public void play() throws IllegalArgumentException{
         boolean fin = false;
-        while (fin != false) {
+        while (fin != true) {
             for (int i=0; i<players.size();i++){
                 move(players.get(i));
                 discardToken(players.get(i));
