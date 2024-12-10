@@ -13,6 +13,7 @@ public abstract class Player implements Displayable {
         this.id = id;
         this.name = name;
         resources = new Resources(0,0,0,0,0);
+        purchasedCards = new ArrayList<>();
     }
     
     /* --- Accesseurs des atribus --- */
@@ -115,7 +116,7 @@ public abstract class Player implements Displayable {
         strPlayer[0] = "Player "+(id+1)+": "+name;
         strPlayer[1] = pointStr + "pts";
         strPlayer[2] = "";
-        for(Resource res: resources.getAvailableResources()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        for(Resource res: Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             strPlayer[3+(Resource.values().length-1-res.ordinal())] = res.toSymbol() + " ("+resources.getNbResource(res)+") ["+getResFromCards(res)+"]";
         }
         
