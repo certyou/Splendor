@@ -6,6 +6,8 @@
  */
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Game extends Exception {
     /* L'affichage et la lecture d'entrée avec l'interface de jeu se fera entièrement via l'attribut display de la classe Game.
@@ -20,8 +22,10 @@ public class Game extends Exception {
     
     private Board board;
     private ArrayList<Player> players;
+    private Scanner scan = new Scanner(System.in);
+    private static int id; 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException{
         //-- à modifier pour permettre plusieurs scénarios de jeu
         display.outBoard.println("Bienvenue sur Splendor !");
         Game game = new Game(2);
@@ -37,13 +41,23 @@ public class Game extends Exception {
         
         board = new Board();
         players = new ArrayList<Player>();
+        id = 1;
         
-        HumanPlayer joueur1 = new HumanPlayer();
+    
+        String name;
+        name = scan.next();
+        HumanPlayer joueur1 = new HumanPlayer(id, name, board);
         players.add(joueur1);
+        id+=1;
+        
+        
         
         for(int i = 0 ; i<nbOfPlayers-1;i++) {
-            DumbRobotPlayer robot = new DumbRobotPlayer();
+            System.out.println("Veuillez rentrer un nom : ");
+            name = scan.next();
+            DumbRobotPlayer robot = new DumbRobotPlayer(id, name, board);
             players.add(robot);
+            id+=1;
         }
     }
 
@@ -67,27 +81,29 @@ public class Game extends Exception {
         display.outBoard.clean();
         display.outBoard.println(String.join("\n", mainDisplay));
     }
-
-    public void process(Player player, Ressource choix, Board board)
-    {
-        if (board.getNbResource(Resource.choix)>3) {
-            player.updateNbResource(Resource.choix,2);
-        }
-    }
     
-    public void play(Player player){
-        move(player);
-        discardToken(player);
+    public void play() throws IllegalArgumentException{
+        boolean fin = false;
+        while (fin != false) {
+            for (int i=0; i<players.size();i++){
+                move(players.get(i));
+                discardToken(players.get(i));
+            }
+            fin = isGameOver();
+        }
+        gameOver();
+        
     }
 
-    private void move(Player player){
-        Action choix = player.chooseAction(board);
+    private void move(Player player) throws IllegalArgumentException{
+        Action choix = player.chooseAction();
         choix.process(player, board);
     }
 
     private void discardToken(Player player){
         if (player.getNbTokens() > 10 ) {
-            DiscardTokensAction choix = new DiscardTokensAction();
+            int n = player.getNbTokens() - 10;
+            DiscardTokensAction choix = new DiscardTokensAction(n);
         }
     }
 
