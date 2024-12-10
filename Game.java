@@ -85,7 +85,7 @@ public class Game extends Exception {
     
     public void play() throws IllegalArgumentException{
         boolean fin = false;
-        while (fin != false) {
+        while (fin != true) {
             for (int i=0; i<players.size();i++){
                 move(players.get(i));
                 discardToken(players.get(i));
