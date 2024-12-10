@@ -38,14 +38,14 @@ public class HumanPlayer extends Player
         
         // Acheter une carte sur le plateau
         if(choice == 1){
-            validInput = new int[]{1, 2, 3};
+            validInput = new int[]{1, 2, 3, 4};
             
             while(true){
                 inputMessage = "\nEntrer la ligne de la carte que vous souhaitez acheter:\n -1 : Tier 1\n -2 : Tier 2\n -3 : Tier 3";
                 errorMessage = "Le numero de ligne que vous avez entré n'est pas valide.";
                 i = PlayerChoice(inputMessage, errorMessage, validInput);
                 
-                inputMessage = "\nEntrer la colone de la carte que vous souhaitez acheter:\n -1 : Colone de gauche\n -2 : Colone du milieu\n -3 : Colone de droite";
+                inputMessage = "\nEntrer la colone de la carte que vous souhaitez acheter:\n -1 : Colone 1\n -2 : Colone 2\n -3 : Colone 3\n -4 : Colone 4";
                 errorMessage = "Le numero de colone que vous avez entré n'est pas valide.";
                 j = PlayerChoice(inputMessage, errorMessage, validInput);
                 
@@ -69,7 +69,7 @@ public class HumanPlayer extends Player
                     return new PickSameTokensAction(resource);
                 }
                 else{
-                    Game.display.out.println("Choix invalide: vous avez choisit qui n'a plus assez de stock.");
+                    Game.display.out.println("Choix invalide: vous avez choisit une ressource qui n'a plus assez de stock.");
                 }
             }
         }
