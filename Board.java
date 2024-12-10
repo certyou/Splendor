@@ -27,7 +27,7 @@ public class Board implements Displayable {
      *  - initialise visibleCards, stackCards et resources
      * 
      */
-    public Board(){
+    public Board(int nb_player){
         visibleCards = new DevCard[3][4];
         this.filename = "stats.csv";
         stackCards = new ArrayList<Stack<DevCard>>();
@@ -35,7 +35,14 @@ public class Board implements Displayable {
         stackCards.add(new Stack<DevCard>()); // tier 1
         stackCards.add(new Stack<DevCard>()); // tier 2
         stackCards.add(new Stack<DevCard>()); // tier 3
-        resources = new Resources(0,0,0,0,0);
+        if (nb_player == 2){
+            resources = new Resources(4,4,4,4,4);
+        } else if (nb_player == 3){
+            resources = new Resources(5,5,5,5,5);
+        } else {
+            resources = new Resources(7,7,7,7,7);
+        }
+        
         
         try {
             scanner = new Scanner(new File(filename));
@@ -64,6 +71,12 @@ public class Board implements Displayable {
         // Mélange les cartes de chaque piles
         for (Stack lib : stackCards){
             Collections.shuffle(lib);
+        }
+        
+        for (int i=0; i<3; i++){
+            for (int j=0; j<4; j++){
+                visibleCards[i][j] = drawCard(i);
+            }
         }
     }
 
@@ -143,7 +156,7 @@ public class Board implements Displayable {
         res = Display.concatStringArray(res, resourcesToStringArray(), true);
         res = Display.concatStringArray(res, Display.emptyStringArray(35, 1, " \u250A"), false);
         res = Display.concatStringArray(res, Display.emptyStringArray(1, 54, "\u2509"), true);
-    
+        
         return res;
     }
 

@@ -39,7 +39,7 @@ public class Game extends Exception {
             throw new IllegalArgumentException();
         }
         
-        board = new Board();
+        board = new Board(nbOfPlayers);
         players = new ArrayList<Player>();
         id = 1;
         
@@ -87,7 +87,10 @@ public class Game extends Exception {
         boolean fin = false;
         while (fin != true) {
             for (int i=0; i<players.size();i++){
-                board.toStringArray();
+                for (int j=0; j<board.toStringArray().length;j++) {
+                    Game.display.outBoard.println(board.toStringArray()[j]);
+                }
+                Game.display.outBoard.println();
                 move(players.get(i));
                 discardToken(players.get(i));
             }
