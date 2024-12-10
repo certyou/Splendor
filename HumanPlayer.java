@@ -28,6 +28,8 @@ public class HumanPlayer extends Player
         Resources resourcesRec = new Resources(0,0,0,0,0);
         String inputMessage, errorMessage;
         
+        Game.display.out.println("==== Tour de " + super.getName() + " ====");
+        
         //Choix de l'acction à effectuer
         int[] validInput = {1,2,3,4};
         inputMessage = "\nChoisissez votre action:\n -1 : Acheter une carte sur le plateau \n -2 : Prendre 2 jetons ressources de même type\n -3 : Prendre 3 jetons ressources de type différents\n -4 : Passer son tour";

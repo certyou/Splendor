@@ -19,6 +19,8 @@ public class DumbRobotPlayer extends Player
     
     public Action chooseAction(){
         //Acheter une carte sur le plateau 
+        Game.display.out.println("==== Tour de " + super.getName() + " ====");
+        
         DevCard card;
         for(int i=0; i<4; i++){
             for(int j=0; i<4; i++){
