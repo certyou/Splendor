@@ -71,7 +71,6 @@ public abstract class Player implements Displayable {
     }
     
     public boolean canBuyCard(DevCard card){
-        boolean verif = true;
         Resources cardCoast = card.getCost();
         int cardRes;
         int playerRes;
