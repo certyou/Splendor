@@ -189,10 +189,10 @@ public class Board implements Displayable {
         int cpt=0;
         for (DevCard card : visibleCards[old_card.getTier()]){
             if (card.equals(old_card)){
-                if (visibleCards[old_card.getTier()].length == 0){
-                    visibleCards[old_card.getTier()][cpt] = null;
+                if (stackCards.get(old_card.getTier()).size() == 0){
+                    visibleCards[3-old_card.getTier()][cpt] = null;
                 } else {
-                    visibleCards[old_card.getTier()][cpt] = drawCard(old_card.getTier());
+                    visibleCards[3-old_card.getTier()][cpt] = drawCard(old_card.getTier());
                 }
             }
             cpt++;

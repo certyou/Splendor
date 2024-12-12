@@ -118,9 +118,9 @@ public class DevCard implements Displayable {
     }
     
     public boolean equals(DevCard card){
-        return tier == card.tier
-        && points == card.points
-        && resourceType == card.resourceType
-        && cost.equals(card.cost);
+        return tier == card.getTier()
+        && points == card.getPoints()
+        && resourceType == card.getResourceType()
+        && cost.equals(card.getCost());
     }
 }

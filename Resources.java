@@ -145,7 +145,7 @@ public class Resources extends HashMap<Resource, Integer> {
     
     public boolean equals(Resources res){
         for (Resource r : Resource.values()){
-            if (super.get(r) != super.get(res)){
+            if (super.get(r) != res.get(r)){
                 return false;
             }
         }
