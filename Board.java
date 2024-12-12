@@ -187,12 +187,12 @@ public class Board implements Displayable {
     
     public void updateCard(DevCard old_card){
         int cpt=0;
-        for (DevCard card : visibleCards[old_card.getTier()]){
+        for (DevCard card : visibleCards[3-old_card.getTier()]){
             if (card.equals(old_card)){
-                if (visibleCards[old_card.getTier()].length == 0){
-                    visibleCards[old_card.getTier()][cpt] = null;
+                if (visibleCards[3-old_card.getTier()].length == 0){
+                    visibleCards[3-old_card.getTier()][cpt] = null;
                 } else {
-                    visibleCards[old_card.getTier()][cpt] = drawCard(old_card.getTier());
+                    visibleCards[3-old_card.getTier()][cpt] = drawCard(old_card.getTier());
                 }
             }
             cpt++;
