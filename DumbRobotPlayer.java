@@ -22,9 +22,9 @@ public class DumbRobotPlayer extends Player
         Game.display.out.println("\n==== Tour de " + super.getName() + " ====");
         
         DevCard card;
-        for(int i=1; i<4; i++){
-            for(int j=0; i<4; i++){
-                card = board.getCard(i-1,j);
+        for(int i=0; i<3; i++){
+            for(int j=0; j<4; j++){
+                card = board.getCard(i,j);
                 if(super.canBuyCard(card)){
                     return new BuyCardAction(card);
                 }

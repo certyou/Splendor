@@ -48,9 +48,9 @@ public class HumanPlayer extends Player
                 inputMessage = "\nEntrer la colone de la carte que vous souhaitez acheter:\n -1 : Colone 1\n -2 : Colone 2\n -3 : Colone 3\n -4 : Colone 4";
                 errorMessage = "Le numero de colone que vous avez entré n'est pas valide.";
                 j = PlayerChoice(inputMessage, errorMessage, validInput);
-                
-                if(canBuyCard(board.getCard(i-1,j-1))){
-                    return new BuyCardAction(board.getCard(i-1,j-1));
+                System.out.println(board.getCard(3-i,j-1));
+                if(canBuyCard(board.getCard(3-i,j-1))){
+                    return new BuyCardAction(board.getCard(3-i,j-1));
                 }
                 else{
                     Game.display.out.println("Choix invalide: vous n'avez pas assez de ressource pour acheter cette carte.");
