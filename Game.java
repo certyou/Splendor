@@ -132,6 +132,7 @@ public class Game extends Exception {
             }
         }
         Game.display.outBoard.println("Bravo à " + gagnant +" vous avez gagné");
+        System.out.println("Bravo à " + gagnant +" vous avez gagné");
     }
 
 
