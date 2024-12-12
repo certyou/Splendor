@@ -109,7 +109,7 @@ public class DevCard implements Displayable {
     public String toString(){
         String cardStr = "";
         cardStr = getPoints()+"pts, type "+resourceType.toSymbol()+" | coût: ";
-        for(Resource res : Resource.values()){
+        for(Resource res : Resource.values()){ 
             if(getCost().getNbResource(res)>0){
                 cardStr += getCost().getNbResource(res)+res.toSymbol()+" ";
             }
@@ -118,9 +118,15 @@ public class DevCard implements Displayable {
     }
     
     public boolean equals(DevCard card){
-        return tier == card.tier
-        && points == card.points
-        && resourceType == card.resourceType
-        && cost.equals(card.cost);
+        System.out.println("new card"); 
+        System.out.println(tier == card.getTier() && points == card.getPoints() && resourceType == card.getResourceType() && cost.equals(card.getCost()));
+        System.out.println(tier == card.getTier());
+        System.out.println(points == card.getPoints());  
+        System.out.println(resourceType == card.getResourceType());  
+        System.out.println(cost.equals(card.getCost()));  
+        return tier == card.getTier()
+        && points == card.getPoints()
+        && resourceType == card.getResourceType()
+        && cost.equals(card.getCost());
     }
 }
