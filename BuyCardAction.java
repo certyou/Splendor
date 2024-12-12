@@ -29,8 +29,12 @@ public class BuyCardAction implements Action
         player.addPurchasedCard(card);
         player.updatePoints(card.getPoints());
         for (Resource res : card.getCost().getAvailableResources()) {
-            player.updateNbResource(res, -card.getCost().getNbResource(res));
-            board.updateNbResource(res, card.getCost().getNbResource(res));
+            int nouv = card.getCost().getNbResource(res) - player.getResFromCards(res);
+            if ( nouv <= 0 ) {
+                nouv = 0;
+            }
+            player.updateNbResource(res, -nouv);
+            board.updateNbResource(res, nouv);
         }
         
     }
