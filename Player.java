@@ -74,9 +74,9 @@ public abstract class Player implements Displayable {
         Resources cardCoast = card.getCost();
         int cardRes;
         int playerRes;
-        for(Resource resource: cardCoast.getAvailableResources()){
-            cardRes = cardCoast.getNbResource(resource);
-            playerRes = getNbResource(resource) + getResFromCards(resource);
+        for(Resource res: cardCoast.getAvailableResources()){
+            cardRes = cardCoast.getNbResource(res);
+            playerRes = getNbResource(res) + getResFromCards(res);
             if(playerRes < cardRes){
                 return false;
             }
