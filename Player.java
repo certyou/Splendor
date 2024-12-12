@@ -114,7 +114,7 @@ public abstract class Player implements Displayable {
         }
 
         
-        strPlayer[0] = "Player "+(id+1)+": "+name;
+        strPlayer[0] = "Player "+(id)+": "+name;
         strPlayer[1] = pointStr + "pts";
         strPlayer[2] = "";
         for(Resource res: Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
