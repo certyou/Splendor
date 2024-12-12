@@ -108,14 +108,12 @@ public class DevCard implements Displayable {
 
     public String toString(){
         String cardStr = "";
-        /*
         cardStr = getPoints()+"pts, type "+resourceType.toSymbol()+" | coût: ";
-        for(Resource res : Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        for(Resource res : Resource.values()){
             if(getCost().getNbResource(res)>0){
                 cardStr += getCost().getNbResource(res)+res.toSymbol()+" ";
             }
         }
-        */
         return cardStr;
     }
     
