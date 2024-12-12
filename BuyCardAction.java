@@ -25,9 +25,7 @@ public class BuyCardAction implements Action
      */
     public void process(Player player, Board board)
     {
-        board.updateCard(card);
-        player.addPurchasedCard(card);
-        player.updatePoints(card.getPoints());
+        
         for (Resource res : card.getCost().getAvailableResources()) {
             int nouv = card.getCost().getNbResource(res) - player.getResFromCards(res);
             if ( nouv <= 0 ) {
@@ -36,6 +34,8 @@ public class BuyCardAction implements Action
             player.updateNbResource(res, -nouv);
             board.updateNbResource(res, nouv);
         }
-        
+        board.updateCard(card);
+        player.addPurchasedCard(card);
+        player.updatePoints(card.getPoints());
     }
 }
