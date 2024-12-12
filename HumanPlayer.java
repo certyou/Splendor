@@ -115,11 +115,12 @@ public class HumanPlayer extends Player
         Resource resource;
         
         int[] validInput = {1, 2, 3, 4, 5};
-        inputMessage = "\nEntrer le numero de la ressource que vous souhaitez récupérer:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
+        inputMessage = "\nVous avez plus de 10 jetons, entrer le numero de la ressource dont vous voulez vous débarasser:\n -1 : DIAMANT \u2666\n -2 : SAPHIR \u2660\n -3 : EMERAUDE \u2663\n -4 : ONYX \u25CF\n -5 : RUBIS \u2665";
         errorMessage = "Le numero de la ressource que vous avez entré n'est pas valide.";
         
         while(nbTokenToDiscard != 0){
             choice = PlayerChoice(inputMessage, errorMessage, validInput);
+            
             resource = resTab[choice-1];
             if(super.getNbResource(resource) - resourcesRec.getNbResource(resource) <= 0){
                 Game.display.out.println("Choix invalide: vous avez choisit une ressource que vous n'avez plus en stock.");

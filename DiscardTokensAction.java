@@ -6,7 +6,7 @@
  */
 public class DiscardTokensAction implements Action
 {
-    private int nb_res = 0;
+    private int nb_res;
 
     /**
      * Constructeur d'objets de classe DiscardTokensAction
@@ -25,11 +25,10 @@ public class DiscardTokensAction implements Action
      */
     public void process(Player player, Board board) throws IllegalArgumentException
     {
-        
         Resources res = player.chooseDiscardingTokens(nb_res);
-        
         for (Resource resource : res.getAvailableResources()) {
             player.updateNbResource(resource, -res.getNbResource(resource));
+            board.updateNbResource(resource, res.getNbResource(resource));
         }
     }
 }

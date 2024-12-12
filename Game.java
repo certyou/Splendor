@@ -101,10 +101,11 @@ public class Game extends Exception {
         choix.process(player, board);
     }
 
-    private void discardToken(Player player){
+    private void discardToken(Player player) throws IllegalArgumentException {
         if (player.getNbTokens() > 10 ) {
             int n = player.getNbTokens() - 10;
             DiscardTokensAction choix = new DiscardTokensAction(n);
+            choix.process(player, board);
         }
     }
 
