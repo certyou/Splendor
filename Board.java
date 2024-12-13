@@ -188,12 +188,13 @@ public class Board implements Displayable {
     public void updateCard(DevCard old_card){
         int cpt=0;
         for (DevCard card : visibleCards[3-old_card.getTier()]){
-            System.out.println(card.equals(old_card));
-            if (card.equals(old_card)){
-                if (stackCards.get(old_card.getTier()).size() == 0){
-                    visibleCards[3-old_card.getTier()][cpt] = null;
-                } else {
-                    visibleCards[3-old_card.getTier()][cpt] = drawCard(old_card.getTier());
+            if (card != null){
+                if (card.equals(old_card)){
+                    if (stackCards.get(old_card.getTier()).size() == 0){
+                        visibleCards[3-old_card.getTier()][cpt] = null;
+                    } else {
+                        visibleCards[3-old_card.getTier()][cpt] = drawCard(old_card.getTier());
+                    }
                 }
             }
             cpt++;
