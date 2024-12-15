@@ -28,7 +28,7 @@ public class HumanPlayer extends Player
         Resources resourcesRec = new Resources(0,0,0,0,0);
         String inputMessage, errorMessage;
         
-        Game.display.out.println("\n==== Tour de " + super.getName() + " ====");
+        Game.display.out.println("\n\n==== Tour de " + super.getName() + " ====");
         
         //Choix de l'acction à effectuer
         int[] validInput = {1,2,3,4};
@@ -68,7 +68,7 @@ public class HumanPlayer extends Player
                 choice = PlayerChoice(inputMessage, errorMessage, validInput);
                 resource = resTab[choice-1];
                 if(board.getNbResource(resource) >= 4 ){
-                    Game.display.out.println("\nVous récupéré les trois ressources suivantes : " + resource);
+                    Game.display.out.println("\nVous récupéré les deux ressources suivantes : " + resource);
                     return new PickSameTokensAction(resource);
                 }
                 else{
