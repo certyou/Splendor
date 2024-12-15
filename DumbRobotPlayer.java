@@ -8,15 +8,36 @@
 import java.util.Random;
 import java.util.ArrayList;
 
+/**
+ * Classe DumbRobotPlayer représentant un robot.
+ * Hérite de la classe abstraite Player et permet au robot d'effectuer des acctions prédéterminées
+ */
 public class DumbRobotPlayer extends Player
 {
     Board board;
     
+    /**
+     * Constructeur de la classe DumbRobotPlayer.
+     * Initialise un robot avec un identifiant, un nom et une référence au plateau de jeu.
+     *
+     * parametre: id,    L'identifiant unique du robot.
+     * parametre: name,  Le nom du robot.
+     * parametre: board, Une instance du plateau de jeu (Board).
+     */
     public DumbRobotPlayer(int id, String name, Board board){
         super(id, name);
         this.board = board;
     }
     
+    /**
+     * Permet au robot d'effectuer des acctions prédéterminées :
+     * - Acheter une carte de développement.
+     * - Prendre 2 jetons ressources de même type.
+     * - Prendre 3 jetons ressources de types différents.
+     * - Passer son tour.
+     *
+     * return: Une instance de la classe Action représentant l'action choisie par le robot.
+     */
     public Action chooseAction(){
         //Acheter une carte sur le plateau 
         Game.display.out.println("\n\n==== Tour de " + super.getName() + " ====");
@@ -69,6 +90,12 @@ public class DumbRobotPlayer extends Player
         return new PassAction();
     }
     
+    /**
+     * Permet au robot de défausser des jetons lorsqu'il dépasse la limite de 10 jetons.
+     *
+     * paramètre: nbTokenToDiscard, Le nombre de jetons à défausser.
+     * return: Une instance de Resources représentant les jetons défaussés..
+     */
     public Resources chooseDiscardingTokens(int nbTokenToDiscard){
         Random randomNumbers = new Random();
         ArrayList<Resource> recourceList = super.getAvailableResources();
