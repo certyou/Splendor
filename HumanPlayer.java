@@ -9,16 +9,38 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 import java.util.InputMismatchException;
 
+/**
+ * Classe HumanPlayer représentant un joueur humain.
+ * Hérite de la classe abstraite Player et permet au joueur humain de choisir ses actions via une interface console.
+ */
 public class HumanPlayer extends Player
 {
     private Scanner keyBord = new Scanner(Game.display.in);
     private Board board;
     
+    /**
+     * Constructeur de la classe HumanPlayer.
+     * Initialise un joueur humain avec un identifiant, un nom et une référence au plateau de jeu.
+     *
+     * parametre: id,    L'identifiant unique du joueur.
+     * parametre: name,  Le nom du joueur.
+     * parametre: board, Une instance du plateau de jeu (Board).
+     */
     public HumanPlayer(int id, String name,Board board){
         super(id, name);
         this.board = board;
     }
     
+    /**
+     * Permet au joueur humain de choisir une action à effectuer parmi :
+     * - Acheter une carte de développement.
+     * - Prendre 2 jetons ressources de même type.
+     * - Prendre 3 jetons ressources de types différents.
+     * - Passer son tour.
+     *
+     * return: Une instance de la classe Action représentant l'action choisie par le joueur.
+     * throws: IllegalArgumentException Si l'entrée utilisateur est invalide.
+     */
     public Action chooseAction() throws IllegalArgumentException
     {
         int choice,i,j,cmp = 0;
@@ -107,6 +129,13 @@ public class HumanPlayer extends Player
         return new PassAction();
     }
     
+    /**
+     * Permet au joueur de choisir les jetons à défausser lorsqu'il dépasse la limite de 10 jetons.
+     *
+     * paramètre: nbTokenToDiscard, Le nombre de jetons à défausser.
+     * return: Une instance de Resources représentant les jetons défaussés.
+     * throws: IllegalArgumentException Si l'entrée utilisateur est invalide.
+     */
     public Resources chooseDiscardingTokens(int nbTokenToDiscard) throws IllegalArgumentException{
         int choice;
         String inputMessage, errorMessage;
@@ -133,6 +162,16 @@ public class HumanPlayer extends Player
         return resourcesRec;
     }
     
+    /**
+     * Méthode utilitaire pour gérer les choix du joueur.
+     * Affiche un message au joueur et valide que l'entrée utilisateur seulement si le choix est valide.
+     *
+     * paramètre: inputMessage,  Le message affiché à l'utilisateur.
+     *            errorMessage,  Le message d'erreur en cas d'entrée invalide.
+     *            tab,           Un tableau des choix valides sous forme d'entiers.
+     * return: L'entrée utilisateur valide, sous forme d'entier.
+     * throws: IllegalArgumentException Si l'entrée utilisateur est invalide.
+     */
     private int PlayerChoice(String inputMessage, String errorMessage, int[] tab) throws IllegalArgumentException
     {
         Game.display.out.println(inputMessage);
