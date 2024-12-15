@@ -27,8 +27,14 @@ public class Game extends Exception {
     private Scanner scan = new Scanner(Game.display.in);
     private static int id; 
 
+    /**
+     * Méthode permettant de lancer une partie :
+     * 
+     * Création d'un objet Game
+     * Gestion de la fermeture de la fenêtre de jeu
+     *
+     */
     public static void main(String[] args) throws IllegalArgumentException{
-        // Fonction permettant de lancer une partie
         int choice;
         Scanner scanner = new Scanner(Game.display.in);
         
@@ -39,10 +45,15 @@ public class Game extends Exception {
         game.play();
         display.close();
     }
-
+    
+    /**
+     * Constructeur de la classe Game.
+     * Initialise une partie du jeu
+     *
+     * parametre: nbOfPlayer,    Nombre joueurs.
+     */
     public Game(int nbOfPlayers) throws IllegalArgumentException 
     {
-        //Constructeur de la class Game
         
         //Gestion de l'erreur pour que le nombre de joueur soit entre 2 et 4
         if (nbOfPlayers<2 || nbOfPlayers>4) {
@@ -70,14 +81,22 @@ public class Game extends Exception {
             id+=1;
         }
     }
-
+    
+    /**
+     * Accesseur de l'attribut nbOfPlayers
+     *
+     * return: int, Nombre de joueurs
+     */
     public int getNbPlayers(){
-        //Accesseur de l'attribut nbOfPlayers
         return players.size(); 
     }
 
+    /**
+     * Méthode permettant l'affichage du plateau de jeu
+     *
+     * paramètre : int, id du joueur qui joue
+     */
     private void display(int currentPlayer){
-        //Méthode permettant l'affichage du plateau de jeu
         String[] boardDisplay = board.toStringArray();
         String[] playerDisplay = Display.emptyStringArray(0, 0);
         for(int i=0;i<players.size();i++){
@@ -94,8 +113,13 @@ public class Game extends Exception {
         display.outBoard.println(String.join("\n", mainDisplay));
     }
     
+    /**
+     * Méthode gérant le déroulement de la partie
+     *
+     * throws : IllegalArgumentException
+     */
     public void play() throws IllegalArgumentException{
-        //Méthode gérant le déroulement de la partie
+        
         boolean fin = false;
         while (fin != true) {
             //Les joueurs jouent à tour de rôle
@@ -122,8 +146,12 @@ public class Game extends Exception {
         
     }
 
+    /**
+     * Méthode permettant de gérer le tour d'un joueur
+     *
+     * paramètre : Player, joueur jouant son tour
+     */
     private void move(Player player) throws IllegalArgumentException{
-        //Fonction permettant de gérer le tour d'un joueur
         
         //Récupération du choix du joueur
         Action choix = player.chooseAction();
@@ -132,8 +160,12 @@ public class Game extends Exception {
         choix.process(player, board);
     }
 
+    /**
+     * Méthode permettant de gérer le test si le joueur à plus de 10 tokens
+     *
+     * paramètre : Player, joueur jouant son tour
+     */
     private void discardToken(Player player) throws IllegalArgumentException {
-        //Fonction permettant de gérer le test si le joueur à plus de 10 tokens
         if (player.getNbTokens() > 10 ) {
             
             //Calcul du nombre de tokens à enlever
@@ -145,8 +177,12 @@ public class Game extends Exception {
         }
     }
 
+    /**
+     * Méthode permettant de tester si la partie est finie
+     *
+     * return boolean, true ou false en fonction de si la partie est finie
+     */
     public boolean isGameOver(){
-        //Fonction permettant de tester si la partie est finie
         boolean res = false;
         for (int i = 0; i<getNbPlayers();i++) {
             if (players.get(i).getPoints() >= 15) {
@@ -156,8 +192,11 @@ public class Game extends Exception {
         return res;
     }
 
+    /**
+     * Méthode permettant d'afficher le ou les gagnants
+     *
+     */
     private void gameOver(){
-        //Fonction permettant d'afficher le ou les gagnants
         String gagnant  = "";
         for (int i = 0; i<getNbPlayers();i++) {
             if (players.get(i).getPoints() >= 15) {
