@@ -27,8 +27,13 @@ public class Game extends Exception {
 
     public static void main(String[] args) throws IllegalArgumentException{
         //-- à modifier pour permettre plusieurs scénarios de jeu
-        display.outBoard.println("Bienvenue sur Splendor !");
-        Game game = new Game(2);
+        int choice;
+        Scanner scanner = new Scanner(Game.display.in);
+        
+        Game.display.out.println("Bienvenue sur Splendor !\nChoisissez le nombre de joueur (entre 2 et 4): \n");
+        choice = scanner.nextInt();
+        Game game = new Game(choice);
+        Game.display.out.println("\n===== Debut de la partie =====");
         game.play();
         display.close();
     }
@@ -45,16 +50,16 @@ public class Game extends Exception {
         
     
         String name;
-        Game.display.out.println("Veuillez rentrer un nom : ");
+        Game.display.out.println("Joueur " + id + " veuillez rentrer un nom : ");
         name = scan.next();
         HumanPlayer joueur1 = new HumanPlayer(id, name, board);
         players.add(joueur1);
         id+=1;
         
         for(int i = 0 ; i<nbOfPlayers-1;i++) {
-            Game.display.out.println("Veuillez rentrer un nom : ");
+            Game.display.out.println("Veuillez rentrer un nom (Robot): ");
             name = scan.next();
-            DumbRobotPlayer robot = new DumbRobotPlayer(id, name, board);
+            DumbRobotPlayer robot = new DumbRobotPlayer(id, name + " (Robot)", board);
             players.add(robot);
             id+=1;
         }
