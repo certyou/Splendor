@@ -1,32 +1,22 @@
- 
-
-
-/**
- * Décrivez votre classe PickSameTokensAction ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
 public class PickSameTokensAction implements Action
 {
+    
+    //Déclaration des attributs
     private Resource res;
-    /**
-     * Constructeur d'objets de classe PickSameTokensAction
-     */
+    
     public PickSameTokensAction(Resource r)
     {
+        //Constructeur de la classe PickSameTokensAction
         res = r;
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
+    
     public void process(Player player, Board board)
     {
+        //Méthode permettant de récupérer 2 même tokens
         if (board.getNbResource(res)>3) {
+            
+            //Update des informations du plateau et du joueur
             player.updateNbResource(res,2);
             board.updateNbResource(res,-2);
         }
