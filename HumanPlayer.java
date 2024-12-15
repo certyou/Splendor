@@ -50,12 +50,12 @@ public class HumanPlayer extends Player
                 j = PlayerChoice(inputMessage, errorMessage, validInput);
                 Game.display.out.println(board.getCard(3-i,j-1));
                 if(canBuyCard(board.getCard(3-i,j-1))){
+                    Game.display.out.println("\nVous avez acheté la carte suivante : " + board.getCard(3-i,j-1));
                     return new BuyCardAction(board.getCard(3-i,j-1));
                 }
                 else{
                     Game.display.out.println("Choix invalide: vous n'avez pas assez de ressource pour acheter cette carte.");
-                    chooseAction();
-                    break;
+                    return chooseAction();
                 }
             }
         }
@@ -68,12 +68,12 @@ public class HumanPlayer extends Player
                 choice = PlayerChoice(inputMessage, errorMessage, validInput);
                 resource = resTab[choice-1];
                 if(board.getNbResource(resource) >= 4 ){
+                    Game.display.out.println("\nVous récupéré les trois ressources suivantes : " + resource);
                     return new PickSameTokensAction(resource);
                 }
                 else{
                     Game.display.out.println("Choix invalide: vous avez choisit une ressource qui n'a plus assez de stock.");
-                    chooseAction();
-                    break;
+                    return chooseAction();
                 }
             }
         }
@@ -91,13 +91,13 @@ public class HumanPlayer extends Player
                     resourcesRec.updateNbResource(resource, 1);
                     cmp ++;
                     if(cmp == 3){
+                        Game.display.out.println("\nVous récupéré les trois ressources suivantes : " + recourceTabRec[0] + ", " + recourceTabRec[1] + " et " + recourceTabRec[2]);
                         return new PickDiffTokensAction(recourceTabRec[0],recourceTabRec[1],recourceTabRec[2]);
                     }
                 }
                 else{
                     Game.display.out.println("Choix invalide: vous avez choisit une ressource déjà selectionné ou qui n'est plus en stock.");
-                    chooseAction();
-                    break;
+                    return chooseAction();
                 }
             }
         }

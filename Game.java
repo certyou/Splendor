@@ -45,16 +45,16 @@ public class Game extends Exception {
         
     
         String name;
-        Game.display.out.println("Veuillez rentrer un nom : ");
+        Game.display.out.println("Joueur " + id + " veuillez rentrer un nom : ");
         name = scan.next();
         HumanPlayer joueur1 = new HumanPlayer(id, name, board);
         players.add(joueur1);
         id+=1;
         
         for(int i = 0 ; i<nbOfPlayers-1;i++) {
-            Game.display.out.println("Veuillez rentrer un nom : ");
+            Game.display.out.println("Veuillez rentrer un nom (Robot): ");
             name = scan.next();
-            DumbRobotPlayer robot = new DumbRobotPlayer(id, name, board);
+            DumbRobotPlayer robot = new DumbRobotPlayer(id, name + " (Robot)", board);
             players.add(robot);
             id+=1;
         }

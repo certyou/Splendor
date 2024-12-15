@@ -26,7 +26,7 @@ public class DumbRobotPlayer extends Player
             for(int j=0; j<4; j++){
                 card = board.getCard(i,j);
                 if(super.canBuyCard(card)){
-                    Game.display.out.println("\nLe robot à acheté la carte suivante : " + card);
+                    Game.display.out.println("\nLe robot a acheté la carte suivante : " + card);
                     return new BuyCardAction(card);
                 }
             }
@@ -38,7 +38,7 @@ public class DumbRobotPlayer extends Player
         {
             nbRes = board.getNbResource(resource);
             if(nbRes >= 4){
-                Game.display.out.println("\nLe robot à récupéré les deux ressources suivantes : " + resource);
+                Game.display.out.println("\nLe robot a récupéré les deux ressources suivantes : " + resource);
                 return new PickSameTokensAction(resource);
             }
         }
@@ -57,7 +57,7 @@ public class DumbRobotPlayer extends Player
                         res2 = resource;
                     }else{if(nbRes >= 1){
                         res3 = resource;
-                        Game.display.out.println("\nLe robot à récupéré les trois ressources suivantes : " + res1 + ", " + res2 + " et " + res3);
+                        Game.display.out.println("\nLe robot a récupéré les trois ressources suivantes : " + res1 + ", " + res2 + " et " + res3);
                         return new PickDiffTokensAction(res1,res2,res3);
                         }    
                     }
