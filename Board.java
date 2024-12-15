@@ -117,7 +117,16 @@ public class Board implements Displayable {
                             " \u2572________\u2572\u2502"};
         return deckStr;
     }
-
+    
+    /* stringer pour les ressoures du plateau
+     * 
+     * input : /
+     * output :
+     *  - resStr | String
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     private String[] resourcesToStringArray(){
         /** EXAMPLE
          * Resources disponibles : 4♥R 4♣E 4♠S 4♦D 4●O
@@ -130,7 +139,16 @@ public class Board implements Displayable {
         resStr[0] += "        ";
         return resStr;
     }
-
+    
+    /* stringer pour le plateau de jeu
+     * 
+     * input : /
+     * output :
+     *  - res | String
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     private String[] boardToStringArray(){
         String[] res = Display.emptyStringArray(0, 0);
 
@@ -159,32 +177,110 @@ public class Board implements Displayable {
         
         return res;
     }
-
+    
+    /* stringer pour le plateau de jeu
+     * 
+     * input : /
+     * output :
+     *  - res | String
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     @Override
     public String[] toStringArray() {
         return boardToStringArray();
     }
     
+    /* getter pour les ressources d'un type res
+     * 
+     * input :
+     *  - res | Ressources
+     * output :
+     *  - int
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public int getNbResource(Resource res){
         return resources.getNbResource(res);
     }
     
+    /* setter pour les ressources d'un type res
+     * 
+     * input :
+     *  - res | Ressources
+     *  - new_value | int
+     * output : /
+     * precondition :
+     *  - new_value doit être positif
+     * postcondition :
+     *  - augmente le nombre de ressource du type res du nombre new_value
+     * 
+     */
     public void setNbResource(Resource res, int new_value){
         resources.setNbResource(res, new_value);
     }
-
+    
+    /* update pour les ressources d'un type res
+     * 
+     * input :
+     *  - res | Ressources
+     *  - v | int
+     * output : /
+     * precondition :
+     *  - new_value doit être positif
+     * postcondition :
+     *  - modifie le nombre de ressource de type res au nombre v
+     * 
+     */
     public void updateNbResource(Resource resource, int v){
         resources.updateNbResource(resource, v);
     }
     
+    /* update pour les ressources d'un type res
+     * 
+     * input :
+     *  - res | Ressources
+     *  - v | int
+     * output : /
+     * precondition :
+     *  - new_value doit être positif
+     * postcondition :
+     *  - modifie le nombre de ressource de type res au nombre v
+     * 
+     */
     public ArrayList<Resource> getAvailableResources(){
         return resources.getAvailableResources();
     }
     
+    /* update pour les ressources d'un type res
+     * 
+     * input :
+     *  - res | Ressources
+     *  - v | int
+     * output : /
+     * precondition :
+     *  - new_value doit être positif
+     * postcondition :
+     *  - modifie le nombre de ressource de type res au nombre v
+     * 
+     */
     public DevCard getCard(int i, int j){
         return visibleCards[i][j];
     }
     
+    /* remplace la carte en argument par une autre
+     * 
+     * input :
+     *  - old_card | DevCard
+     * output : /
+     * precondition :
+     *  - old_card doit être une carte de visibleCard
+     * postcondition :
+     *  - remplace old_car par une carte du même tier
+     * 
+     */
     public void updateCard(DevCard old_card){
         int cpt=0;
         for (DevCard card : visibleCards[3-old_card.getTier()]){
@@ -202,14 +298,46 @@ public class Board implements Displayable {
         
     }
     
+    /* pioche une carte du tier donné
+     * 
+     * input :
+     *  - tier | int
+     * output :
+     *  - DevCard
+     * precondition :
+     *  - tier doit être compris entre 1 et 3
+     * postcondition :
+     *  - renvoie et retire de la pile une carte du tier donné
+     * 
+     */
     public DevCard drawCard(int tier){
         return stackCards.get(tier).pop();
     }
     
+    /* vérifie si le nombre de token est suffisant pour prendre deux de la même ressource
+     * 
+     * input :
+     *  - res | Resource
+     * output :
+     *  - boolean
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public boolean canGiveSameTokens(Resource res){
         return getNbResource(res) >= 4;
     }
     
+    /* vérifie si le nombre de token est suffisant pour prendre les 3 ressources différentes en argument
+     * 
+     * input :
+     *  - res_wanted | ArrayList<Resource>
+     * output :
+     *  - boolean
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public boolean canGiveDiffTokens (ArrayList<Resource> res_wanted){
         ArrayList<Resource> res_dispo = getAvailableResources();
         for (Resource res :res_wanted){

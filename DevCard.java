@@ -1,11 +1,26 @@
- 
-
 public class DevCard implements Displayable {
     private int tier;
     private Resources cost;
     private int points;
     private Resource resourceType;
-
+    
+    /* constructeur de la classe DevCard
+     * 
+     * input :
+     *  - tier | int
+     *  - coutDIAMMOND | int
+     *  - coutSAPPHIRE | int
+     *  - coutEMERALD | int
+     *  - coutRUBY | int
+     *  - coutONYX | int
+     *  - points | int
+     *  - type | String
+     * output : /
+     * precondition : /
+     * postcondition :
+     *  - initialise tier, cost et points
+     * 
+     */
     public DevCard(int tier, int coutDIAMMOND, int coutSAPPHIRE, int coutEMERALD, int coutRUBY, int coutONYX, int points, String type)
     {
         this.tier = tier;
@@ -31,22 +46,67 @@ public class DevCard implements Displayable {
         }
     }
     
+    /* getter pour le tier
+     * 
+     * input : /
+     * output :
+     *  - tier | int
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public int getTier(){
         return tier;
     }
     
+    /* getter pour les points
+     * 
+     * input : /
+     * output :
+     *  - points | int
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public int getPoints(){
         return points;
     }
     
+    /* getter pour le cout
+     * 
+     * input : /
+     * output :
+     *  - cost | Ressources
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public Resources getCost(){
         return cost;
     }
     
+    /* getter pour le type
+     * 
+     * input : /
+     * output :
+     *  - resourceType | Ressource
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public Resource getResourceType(){
         return resourceType;
     }
     
+    /* stringer de la carte
+     * 
+     * input : /
+     * output :
+     *  - cardStr | String
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public String[] toStringArray(){
         /** EXAMPLE
          * ┌────────┐
@@ -82,7 +142,16 @@ public class DevCard implements Displayable {
         
         return cardStr;
     }
-
+    
+    /* stringer de la carte (si null)
+     * 
+     * input : /
+     * output :
+     *  - cardStr | String
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public static String[] noCardStringArray(){
         /** EXAMPLE
          * ┌────────┐
@@ -105,7 +174,16 @@ public class DevCard implements Displayable {
         
         return cardStr;
     }
-
+    
+    /* toString, résumer de la carte
+     * 
+     * input : /
+     * output :
+     *  - cardStr | String
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public String toString(){
         String cardStr = "";
         cardStr = getPoints()+"pts, type "+resourceType.toSymbol()+" | coût: ";
@@ -117,6 +195,16 @@ public class DevCard implements Displayable {
         return cardStr;
     }
     
+    /* equals, vérifie si la carte en argument est la même que l'objet
+     * 
+     * input :
+     *  - card | DevCard
+     * output :
+     *  - boolean
+     * precondition : /
+     * postcondition : /
+     * 
+     */
     public boolean equals(DevCard card){
         return tier == card.getTier()
         && points == card.getPoints()
