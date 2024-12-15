@@ -1,32 +1,21 @@
-
-/**
- * Décrivez votre classe BuyCardAction ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
 public class BuyCardAction implements Action
 {
+    //Déclaration des attributs
     private DevCard card;
 
-    /**
-     * Constructeur d'objets de classe BuyCardAction
-     */
     public BuyCardAction(DevCard card)
     {
+        //Constructeur de la classe BuyCardAction
         this.card = card;
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
     public void process(Player player, Board board)
     {
+        // Méthode permettant d'acheter une carte
         
         for (Resource res : card.getCost().getAvailableResources()) {
+            
+            //Update des informations du plateau et du joueur
             int nouv = card.getCost().getNbResource(res) - player.getResFromCards(res);
             if ( nouv <= 0 ) {
                 nouv = 0;
@@ -34,8 +23,12 @@ public class BuyCardAction implements Action
             player.updateNbResource(res, -nouv);
             board.updateNbResource(res, nouv);
         }
+        
+        //Update du plateau
         board.updateCard(card);
         player.addPurchasedCard(card);
+        
+        //Ajouts des points au joueur
         player.updatePoints(card.getPoints());
     }
 }
