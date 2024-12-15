@@ -202,14 +202,6 @@ public class Board implements Displayable {
         
     }
     
-    public void updateCard(int i, int j){
-        if (visibleCards[i].length == 0){
-            visibleCards[i][j] = null;
-        } else {
-            visibleCards[i][j] =  drawCard(i);
-        }
-    }
-    
     public DevCard drawCard(int tier){
         return stackCards.get(tier).pop();
     }
