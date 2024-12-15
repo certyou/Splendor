@@ -133,7 +133,7 @@ public class HumanPlayer extends Player
         return resourcesRec;
     }
     
-    public int PlayerChoice(String inputMessage, String errorMessage, int[] tab) throws IllegalArgumentException
+    private int PlayerChoice(String inputMessage, String errorMessage, int[] tab) throws IllegalArgumentException
     {
         Game.display.out.println(inputMessage);
         while(true){
